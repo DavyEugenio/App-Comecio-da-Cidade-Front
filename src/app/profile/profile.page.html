@@ -1,10 +1,7 @@
 <ion-header>
   <ion-toolbar class="tool-header">
     <ion-buttons>
-      <ion-button slot="start" href="tabs/tab1">
-        <ion-icon name="arrow-back"></ion-icon>
-      </ion-button>
-      <ion-title *ngIf="usuario; else titleTemplate">{{ usuario.nome }}</ion-title>
+      <ion-title *ngIf="usuario; else titleTemplate">Perfil</ion-title>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -17,10 +14,9 @@
 
 <ion-content>
   <div class="container">
-
     <div *ngIf="usuario && !edit">
       <div class="image-content">
-        <img class="imagem-usuario" [src]="profileImage" alt="">
+        <img class="imagem-usuario" [src]="image">
       </div>
       <ion-button slot="start" class="edit-button" (click)="editarPerfil()">
         Editar perfil
@@ -42,31 +38,29 @@
           {{ estabelecimento.nome }}
           <ion-icon slot="end" name="create"></ion-icon>
         </ion-item>
-
         <ion-item slot="start" class="label2 add" (click)="addEstabelecimento()">
           Novo estabelecimento
           <ion-icon slot="end" name="add"></ion-icon>
         </ion-item>
       </ion-list>
       <br>
-      <ion-button class="delete-account" color="danger" large (click)="sair()" href="tabs/tab2">Sair</ion-button>
+      <ion-button expand="block" [routerLink]="['/tabs/alterar-senha']">Alterar Senha</ion-button>
+      <ion-button expand="block" color="danger" (click)="sair()">Sair</ion-button>
     </div>
-
 
     <!-- template de edição -->
     <div *ngIf="usuario && edit">
       <div class="image-content">
-        <img class="imagem-usuario" [src]="profileImage" alt="">
+        <img class="imagem-usuario" [src]="image">
       </div>
       <div class="buttons">
-        <ion-button class="midia-button">
-          <ion-icon class="icon-button" name="trash-outline"></ion-icon>
+        <ion-button class="midia-button" (click)="deletePicture()" *ngIf="image != '/assets/img/user.jpg'">
+          <ion-icon class="icon-button font-s" name="trash-outline"></ion-icon>
         </ion-button>
         <ion-button class="midia-button mg-l" (click)="getCameraPicture()">
           <ion-icon class="icon-button font-s" name="camera"></ion-icon>
         </ion-button>
       </div>
-
       <ul class="informacoes">
         <li class="label">Nome</li>
         <li class="label2 pad-l">
@@ -76,18 +70,15 @@
         <li class="label2 pad-l">
           <ion-input [(ngModel)]="usuario.email" inputmode="email" autofocus></ion-input>
         </li>
-
       </ul>
       <hr>
       <ion-button color="secondary" (click)="confirmarEdicao()">Salvar</ion-button>
       <ion-button color="danger" (click)="cancelarEdicao()">Cancelar</ion-button>
-
     </div>
-
     <!-- template de loading -->
     <div *ngIf="!usuario">
       <div class="image-content">
-        <img class="imagem-usuario" src="/assets/img/sem_foto.png" alt="">
+        <img class="imagem-usuario" src="/assets/img/sem_foto.png">
       </div>
       <ul class="informacoes">
         <li class="label">Nome</li>
@@ -102,11 +93,7 @@
         <li class="pad-l">
           <ion-skeleton-text animated class="loading-large"></ion-skeleton-text>
         </li>
-
       </ul>
-
     </div>
-
   </div>
-
 </ion-content>

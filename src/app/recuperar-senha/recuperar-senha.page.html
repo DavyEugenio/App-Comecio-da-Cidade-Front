@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar class="tool-header">
+    <ion-buttons>
+      <ion-button slot="start" href="/tabs/tab2">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+      <ion-title>Voltar</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+	<div class="container">
+		<h3>Reupreção de Senha</h3>
+		<br>
+		<br>
+		<ion-item>
+			<ion-input placeholder="Email" class="label" [(ngModel)]="emailDTO.email" type="email"></ion-input>
+		</ion-item>
+		<br>
+		<br>
+		<ion-button large class="botao-recuperar" (click)="recuperar()">Recuperar Senha</ion-button>
+	</div>
+		
+
+</ion-content>

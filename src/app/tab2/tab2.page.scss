@@ -3,7 +3,7 @@ ion-slides{
 }
 .formulario2{
     position: absolute;
-    top: 10%; left: 0; right: 0;
+    top: 5%; left: 0; right: 0;
     width: 85%;
     margin: 0 auto;
     border-radius: 10px;
@@ -20,7 +20,6 @@ ion-slides{
         font-size: large;
         margin-left: 10px;
         margin-right: 10px;
-         
     }
 
     ion-button{
@@ -29,8 +28,8 @@ ion-slides{
         margin-left: 10px;
         margin-right: 10px;  
     }
-    &.altura1{height: 40%; }
-    &.altura2{height: 60%; }    
+    &.altura1{height: 44%; }
+    &.altura2{height: 69%; }    
 }
 .rodape{
     position: absolute;
@@ -47,4 +46,8 @@ ion-slides{
 .danger{
     color: red;
     font-size: x-small;
+}
+
+.recuperar-senha{
+    text-decoration: none;
 }

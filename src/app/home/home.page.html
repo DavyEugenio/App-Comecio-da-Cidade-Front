@@ -4,7 +4,7 @@
     <ion-label>Escolha a Cidade</ion-label>
     <ion-select expand="block" [(ngModel)]="cidadeSelecionada" value="cidadeSelecionada" okText="Confirmar"
       cancelText="Cancelar">
-      <ion-select-option *ngFor="let cidade of cidades" [value]="cidade.id">{{ cidade.nome }}</ion-select-option>
+      <ion-select-option *ngFor="let cidade of cidades" [value]="cidade">{{ cidade.nome }}</ion-select-option>
     </ion-select>
     <ion-button (click)="setCidade()" expand="block">Entrar</ion-button>
   </div>

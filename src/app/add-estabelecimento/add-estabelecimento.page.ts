@@ -19,7 +19,7 @@ import { CidadeService } from '../services/domain/cidade.service';
   templateUrl: './add-estabelecimento.page.html',
   styleUrls: ['./add-estabelecimento.page.scss'],
 })
-export class AddEstabelecimentoPage implements OnInit {
+export class AddEstabelecimentoPage {
 
   formGroup: FormGroup;
   usuario: UsuarioDTO;
@@ -40,7 +40,6 @@ export class AddEstabelecimentoPage implements OnInit {
     public photoService: PhotoService,
     public imageUtils: ImageUtilService,
     public sanitizer: DomSanitizer) {
-
     this.formGroup = this.formBuilder.group({
       nome: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
       cnpj: ['', [Validators.minLength(14), Validators.maxLength(14)]],
@@ -62,7 +61,7 @@ export class AddEstabelecimentoPage implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ionViewDidEnter() {
     let us = this.storage.getLocalUser();
     if (us && us.email) {
       this.usuarioService.findByEmail(us.email)

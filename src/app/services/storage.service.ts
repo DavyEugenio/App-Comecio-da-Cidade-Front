@@ -7,48 +7,41 @@ import { STORAGE_KEYS } from '../config/storage.config';
   providedIn: 'root'
 })
 export class StorageService {
-  constructor() {}
+  constructor() { }
 
-  getLocalCidade(){
+  getLocalCidade() {
     let cidade = localStorage.getItem(STORAGE_KEYS.localCidade);
-
-    if (cidade == null){
+    if (cidade == null) {
       return null;
     }
-    else{
+    else {
       return JSON.parse(cidade);
     }
-
   }
-  setLocalCidade(cidadeDTO: CidadeDTO){
 
-    if (cidadeDTO == null){ 
+  setLocalCidade(cidadeDTO: CidadeDTO) {
+    if (cidadeDTO == null) {
       localStorage.removeItem(STORAGE_KEYS.localCidade);
     }
-    else{ 
+    else {
       localStorage.setItem(STORAGE_KEYS.localCidade, JSON.stringify(cidadeDTO));
-      console.log("cidade setada");
     }
-
-
   }
 
-getLocalUser() : LocalUser {
-  let usr = localStorage.getItem(STORAGE_KEYS.localUser);
-  if( usr == null){
-    return null;
-  }else{
-    return JSON.parse(usr);
+  getLocalUser(): LocalUser {
+    let usr = localStorage.getItem(STORAGE_KEYS.localUser);
+    if (usr == null) {
+      return null;
+    } else {
+      return JSON.parse(usr);
+    }
   }
-}
 
-setLocalUser(obj : LocalUser) {
-  if(obj == null){
-    localStorage.removeItem(STORAGE_KEYS.localUser);
-  }else{
-    localStorage.setItem(STORAGE_KEYS.localUser, JSON.stringify(obj));
+  setLocalUser(obj: LocalUser) {
+    if (obj == null) {
+      localStorage.removeItem(STORAGE_KEYS.localUser);
+    } else {
+      localStorage.setItem(STORAGE_KEYS.localUser, JSON.stringify(obj));
+    }
   }
-}
-
-
 }

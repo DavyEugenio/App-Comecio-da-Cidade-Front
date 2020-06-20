@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router, ActivatedRoute } from '@angular/router';
-import { ProdutoService } from 'src/app/services/domain/produtoServico.service';
+import { ProdutoServicoService } from 'src/app/services/domain/produtoServico.service';
 import { ProdutoServicoDTO } from 'src/app/models/produtoServico.dto';
 import { API_CONFIG } from 'src/app/config/api.config';
 
@@ -13,7 +13,7 @@ export class DetalheProdutoServicoPage implements OnInit {
 
   produtoServico: ProdutoServicoDTO;
   estabelecimentoID: number;
-  constructor(private router: Router, private route: ActivatedRoute, private produtoServicoService: ProdutoService) {
+  constructor(private router: Router, private route: ActivatedRoute, private produtoServicoService: ProdutoServicoService) {
     this.route.queryParams.subscribe(params => {
       let getNav = this.router.getCurrentNavigation();
       if (getNav.extras.state) {

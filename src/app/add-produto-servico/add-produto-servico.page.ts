@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router, ActivatedRoute } from '@angular/router';
-import { ProdutoService } from '../services/domain/produtoServico.service';
+import { ProdutoServicoService } from '../services/domain/produtoServico.service';
 import { ProdutoServicoDTO } from '../models/produtoServico.dto';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
@@ -20,10 +20,11 @@ export class AddProdutoServicoPage implements OnInit {
   formGroup: FormGroup;
   image;
   photo: string = null;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private produtoServicoService: ProdutoService,
+    private produtoServicoService: ProdutoServicoService,
     private formBuilder: FormBuilder,
     private alertCtrl: AlertController,
     public photoService: PhotoService,
@@ -33,6 +34,8 @@ export class AddProdutoServicoPage implements OnInit {
       let getNav = this.router.getCurrentNavigation();
       if (getNav.extras.state) {
         this.estabelecimentoID = getNav.extras.state.estabelecimentoID;
+      } else {
+        this.router.navigate(['tabs/profile']);
       }
     });
     this.formGroup = this.formBuilder.group({

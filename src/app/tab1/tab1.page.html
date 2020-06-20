@@ -1,14 +1,15 @@
 <ion-content color="white">
   <div class="topo">
-    <a class="titulo2" href="home" (click)="nullCidade()">{{ cidade.nome }}<ion-icon name="location-sharp">
+    <a class="titulo2" (click)="nullCidade()">{{ cidade.nome }}<ion-icon name="location-sharp">
       </ion-icon></a>
-    <ion-searchbar placeholder="Comércio da Cidade" autocomplete="on"></ion-searchbar>
+    <ion-searchbar placeholder="Comércio da Cidade" [(ngModel)]="nome" (ngModelChange)="search()" autocomplete="on">
+    </ion-searchbar>
   </div>
-  <div *ngIf="categoria == ''">
+  <div *ngIf="categoria == null">
     <div class="categorias">
       <span class="titulo2">Categorias</span>
       <ion-slides [options]="sliderOpts">
-        <ion-slide *ngFor="let categoria of categorias" (click)="findByCategoria(categoria)">
+        <ion-slide *ngFor="let categoria of categorias" (click)="changeCategoria(categoria)">
           <ion-grid>
             <ion-row class="image-row">
               <ion-col class="ion-align-self-center">
@@ -25,11 +26,11 @@
       </ion-slides>
     </div>
   </div>
-  <div *ngIf="categoria != ''">
+  <div *ngIf="categoria != null">
     <div class="categorias">
       <span class="titulo2">Categoria: </span>
       <ion-chip class="categoria-chip" (click)="clearCategoria()">
-        {{ categoria }}
+        {{ categoria.descricao }}
         <ion-icon name="close"></ion-icon>
       </ion-chip>
     </div>

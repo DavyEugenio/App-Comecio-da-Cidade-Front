@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { StorageService } from '../services/storage.service';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-tabs',
@@ -8,12 +8,17 @@ import { StorageService } from '../services/storage.service';
 })
 export class TabsPage {
   logado: boolean = false;
-  constructor(public storage: StorageService) {
-    let us = this.storage.getLocalUser();
-    if (us && us.email) {
-      this.logado = true;
-    } else {
-      this.logado = false;
-    }
+  constructor(public auth: AuthService) {
+    this.auth.refreshToken()
+      .subscribe(response => {
+        this.auth.successfulLogin(response.headers.get('Authorization'));
+        this.logado = true;
+      }, error => {
+        this.logado = false;
+      });
+  }
+
+  updateButton(logado: boolean) {
+    this.logado = logado;
   }
 }

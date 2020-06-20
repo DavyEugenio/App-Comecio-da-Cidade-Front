@@ -7,8 +7,8 @@ import { PhotoService } from 'src/app/services/photo.service';
 
 import { UsuarioDTO } from 'src/app/models/usuario.dto';
 import { ImageUtilService } from 'src/app/services/domain/image-util.service';
-import { API_CONFIG } from 'src/app/config/api.config';
 import { DomSanitizer } from '@angular/platform-browser';
+import { TabsPage } from '../tabs/tabs.page';
 
 @Component({
   selector: 'app-profile',
@@ -18,19 +18,18 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class ProfilePage implements OnInit {
   usuario: UsuarioDTO;
   edit: boolean = false;
-  profileImage;
+  image;
 
-  constructor(public storage: StorageService,
+  constructor(
+    public storage: StorageService,
     public usuarioService: UsuarioService,
     public photoService: PhotoService,
     public imageUtils: ImageUtilService,
     public sanitizer: DomSanitizer,
     private router: Router,
-    public auth: AuthService) {
-    this.profileImage = '/assets/img/user.jpg';
-  }
-
-  ngOnInit() {
+    public auth: AuthService,
+    private tabs: TabsPage) {
+    this.image = '/assets/img/user.jpg';
     let us = this.storage.getLocalUser();
     if (us && us.email) {
       this.usuarioService.findByEmail(us.email)
@@ -38,6 +37,7 @@ export class ProfilePage implements OnInit {
           response => {
             this.usuario = response;
             this.getImageOfUsuarioIfExists();
+            this.preencherUsuario();
           },
           error => {
             if (error.status == 403) {
@@ -50,15 +50,34 @@ export class ProfilePage implements OnInit {
     }
   }
 
+  ngOnInit() {
+  }
+
+  ionViewDidEnter() {
+    this.preencherUsuario();
+  }
+
+  preencherUsuario() {
+    this.usuarioService.findById(this.usuario.id).subscribe(
+      response => {
+        this.usuario = response;
+        this.getImageOfUsuarioIfExists();
+      },
+      error => {
+        if (error.status == 403) {
+          this.router.navigate(['tabs/tab2']);
+        }
+      }
+    );
+  }
+
   gerenciarEstabelecimento(id: number) {
-    console.log("id=" + id);
     let dados: NavigationExtras = {
       state: {
         estabelecimentoID: id
       }
     };
     this.router.navigate(['tabs/gerenciar-estabelecimento'], dados);
-
   }
 
   editarPerfil() {
@@ -66,10 +85,9 @@ export class ProfilePage implements OnInit {
   }
 
   confirmarEdicao() {
-    console.log(this.usuario);
     this.usuarioService.update(this.usuario).subscribe(
       response => {
-        console.log(response);
+        this.preencherUsuario();
       },
       error => {
       }
@@ -79,10 +97,13 @@ export class ProfilePage implements OnInit {
 
   cancelarEdicao() {
     this.edit = false;
+    this.preencherUsuario();
   }
 
   sair() {
     this.auth.logout();
+    this.tabs.updateButton(false);
+    this.router.navigate(['tabs/tab2']);
   }
 
   getImageOfUsuarioIfExists() {
@@ -90,13 +111,12 @@ export class ProfilePage implements OnInit {
       .subscribe(response => {
         this.imageUtils.blobToDataURL(response).then(dataUrl => {
           let str: string = dataUrl as string;
-          this.profileImage = this.sanitizer.bypassSecurityTrustUrl(str);
+          this.image = this.sanitizer.bypassSecurityTrustUrl(str);
         }
         );
-
       },
         error => {
-          this.usuario.imageUrl = '/assets/img/user.jpg';
+          this.image = '/assets/img/user.jpg';
         }
       );
   }
@@ -107,11 +127,21 @@ export class ProfilePage implements OnInit {
   }
 
   sendPicture(picture) {
-    this.usuarioService.upLoadPicture(picture, this.usuario.id)
+    this.usuarioService.upLoadPicture(picture)
       .subscribe(response => {
         this.getImageOfUsuarioIfExists();
       },
         error => { }
+      );
+  }
+
+  deletePicture() {
+    this.usuarioService.deletePicture()
+      .subscribe(response => {
+        this.getImageOfUsuarioIfExists();
+      },
+        error => {
+        }
       );
   }
 

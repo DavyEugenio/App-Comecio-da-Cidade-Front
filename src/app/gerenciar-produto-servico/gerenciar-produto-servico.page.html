@@ -1,0 +1,113 @@
+<ion-header>
+	<ion-toolbar class="tool-header">
+		<ion-buttons>
+			<ion-button slot="start" (click)="gerenciarEstabelecimento()">
+				<ion-icon name="arrow-back"></ion-icon>
+			</ion-button>
+			<ion-title *ngIf="produtoServico; else titleTemplate">{{ produtoServico.nome }}</ion-title>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+<ng-template #titleTemplate>
+	<ion-title>
+		<ion-skeleton-text animated class="loading-large"></ion-skeleton-text>
+	</ion-title>
+</ng-template>
+
+<ion-content>
+	<div *ngIf="produtoServico && !edit">
+		<div class="container">
+			<div>
+				<img class="imagem-estabelecimento" [src]="image">
+			</div>
+			<ul class="informacoes">
+				<li class="label">Nome</li>
+				<li class="label2">
+					{{ produtoServico.nome }}
+				</li>
+				<li class="label">Preço</li>
+				<li class="label2">
+					{{ produtoServico.preco }}
+				</li>
+				<li class="label" *ngIf="produtoServico.descricao">Descrição</li>
+				<li class="label2" *ngIf="produtoServico.descricao">
+					{{ produtoServico.descricao }}
+				</li>
+			</ul>
+			<ion-button class="botao-util" color="primary" (click)="editar()" large>Editar</ion-button>
+			<ion-button class="botao-util" color="danger" (click)="alertConfirm()" large>Deletar</ion-button>
+			<br>
+		</div>
+	</div>
+
+	<!-- div de edição -->
+	<div *ngIf="produtoServico && edit">
+		<div class="container">
+			<div>
+				<img class="imagem-estabelecimento" [src]="image">
+			</div>
+
+			<div class="image-buttons">
+				<ion-button class="midia-button" (click)="deletePicture()" *ngIf="image != '/assets/img/sem_foto.png'">
+					<ion-icon class="icon-button font-s" name="trash-outline"></ion-icon>
+				</ion-button>
+				<ion-button class="midia-button mg-l" (click)="getCameraPicture()">
+					<ion-icon class="icon-button font-s" name="camera"></ion-icon>
+				</ion-button>
+			</div>
+			<form [formGroup]="formGroup" (ngSubmit)="updateProdutoServico(); $event.preventDefault()">
+				<ul class="informacoes">
+					<li>
+						<ion-item>
+							<ion-label class="label" position="floating">Nome*</ion-label>
+							<ion-input class="label2" type="text" formControlName="nome"></ion-input>
+						</ion-item>
+					</li>
+					<li>
+						<ion-item>
+							<ion-label class="label" position="floating">Preço*</ion-label>
+							<ion-input class="label2" type="text" formControlName="preco"></ion-input>
+						</ion-item>
+					</li>
+					<li>
+						<ion-item>
+							<ion-label class="label" position="floating">Descrição*</ion-label>
+							<ion-textarea class="label2" type="text" formControlName="descricao"></ion-textarea>
+						</ion-item>
+					</li>
+				</ul>
+
+				<br>
+				<ion-button color="success" block type="submit">Salvar</ion-button>
+				<ion-button color="danger" block type="reset" (click)="cancelarEdicao()">Cancelar</ion-button>
+			</form>
+		</div>
+	</div>
+
+	<div *ngIf="!produtoServico">
+		<div class="container">
+
+			<div>
+				<img class="imagem-estabelecimento" src="/assets/img/sem_foto.png">
+			</div>
+
+			<ul class="informacoes">
+				<li class="label">Nome</li>
+				<li>
+					<ion-skeleton-text animated class="loading-large"></ion-skeleton-text>
+				</li>
+				<li class="label">Preço</li>
+				<li>
+					<ion-skeleton-text animated class="loading-large"></ion-skeleton-text>
+				</li>
+				<li class="label">Descrição</li>
+				<li>
+					<ion-skeleton-text animated class="loading-large"></ion-skeleton-text>
+				</li>
+			</ul>
+			<br>
+		</div>
+	</div>
+
+</ion-content>

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { ImageUtilService } from 'src/app/services/domain/image-util.service';
 
 @Injectable()
-export class ProdutoService {
+export class ProdutoServicoService {
   constructor(public http: HttpClient,
     public imageUtilService: ImageUtilService) {
 
@@ -34,14 +34,14 @@ export class ProdutoService {
 
   insert(obj: ProdutoServicoDTO) {
     return this.http.post(
-        `${API_CONFIG.baseUrl}/produtoServicos`,
-        obj,
-        {
-            observe: 'response',
-            responseType: 'text'
-        }
+      `${API_CONFIG.baseUrl}/produtoServicos`,
+      obj,
+      {
+        observe: 'response',
+        responseType: 'text'
+      }
     );
-}
+  }
 
   upLoadPicture(picture, id: string) {
     let picutreBlob = this.imageUtilService.dataUriToBlob(picture);
@@ -57,8 +57,33 @@ export class ProdutoService {
     );
   }
 
+  update(obj: ProdutoServicoDTO, id: string) {
+    return this.http.put(
+      `${API_CONFIG.baseUrl}/produtoServicos/${id}`,
+      obj,
+      {
+        observe: 'response',
+        responseType: 'text'
+      }
+    );
+  }
+
+  delete(id: string) {
+    return this.http.delete(
+      `${API_CONFIG.baseUrl}/produtoServicos/${id}`,
+      {
+        observe: 'response',
+        responseType: 'text'
+      }
+    );
+  }
+
   deletePicture(id: string) {
-    return this.http.get(`${API_CONFIG.baseUrl}/produtoServicos/${id}/picture`);
+    return this.http.delete(`${API_CONFIG.baseUrl}/produtoServicos/${id}/picture`,
+      {
+        observe: 'response',
+        responseType: 'text'
+      });
   }
 
   getImageFromServer(id: string): Observable<any> {

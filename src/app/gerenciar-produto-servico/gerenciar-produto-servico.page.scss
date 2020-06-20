@@ -96,6 +96,7 @@
 	border-radius: 5px;
 }
 
+
 .botao-util {
 	width: 100%;
 }
@@ -120,8 +121,6 @@
 	width: 48%;
 }
 
-// inputs de edicao
-
 ion-input {
 	--padding-top: 0px;
 	--padding-bottom: 0px;
@@ -129,30 +128,4 @@ ion-input {
 
 .mg-l {
 	margin-left: 74px;
-}
-
-.mg-label {
-	margin-left: 10px;
-}
-
-.sparator {
-	border-bottom: 1px solid rgba(22, 22, 22, 0.7);
-	padding-bottom: 5px;
-}
-
-ion-select {
-	background-color: #ddd;
-	opacity: 0.5;
-	color: black;
-	font-size: large;
-	border-radius: 10px;
-	margin-bottom: 20px;
-	margin-top: 10px;
-}
-
-.editarEndereco {
-	width: 100%;
-	--background: #ddd;
-	--color: #333;
-	--border-radius: 2px;
 }

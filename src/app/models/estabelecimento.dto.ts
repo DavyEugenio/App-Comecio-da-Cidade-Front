@@ -10,7 +10,10 @@ export interface EstabelecimentoDTO {
 	facebook?: string;
 	site?: string;
 	horario: string;
-	telefones: string[];
+	telefone1?: string;
+	telefone2?: string;
+	telefone3?: string;
+	telefones?: string[];
 	endereco?: EnderecoDTO;
 	produtoServicos?: ProdutoServicoDTO[];
 	imageUrl?: string;

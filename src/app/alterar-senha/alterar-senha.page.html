@@ -1,0 +1,33 @@
+<ion-header>
+	<ion-toolbar class="tool-header">
+		<ion-buttons>
+			<ion-button slot="start" href="/profile">
+				<ion-icon name="arrow-back"></ion-icon>
+			</ion-button>
+			<ion-title>Voltar</ion-title>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+	<div class="container">
+		<h3>Aterar Senha</h3>
+		<br>
+		<ion-item>
+			<ion-input placeholder="Senha Antiga" class="label" [(ngModel)]="update.senhaAntiga" type="password"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-input placeholder="Nova Senha" class="label" [(ngModel)]="update.senhaNova" type="password"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-input placeholder="Confirmar Nova Senha" class="label" [(ngModel)]="confirmarNovaSenha"
+				type="password"></ion-input>
+		</ion-item>
+		<br>
+		<br>
+		<ion-button large class="alterar" (click)="alterar()">Alterar</ion-button>
+	</div>
+
+
+</ion-content>

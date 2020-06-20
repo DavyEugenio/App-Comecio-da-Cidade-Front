@@ -1,17 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 import { IonicModule } from '@ionic/angular';
-import { ProfilePageRoutingModule } from './profile-routing.module';
-import { ProfilePage } from './profile.page';
+
+import { RecuperarSenhaPageRoutingModule } from './recuperar-senha-routing.module';
+
+import { RecuperarSenhaPage } from './recuperar-senha.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ProfilePageRoutingModule
+    RecuperarSenhaPageRoutingModule
   ],
-  declarations: [ProfilePage]
+  declarations: [RecuperarSenhaPage]
 })
-export class ProfilePageModule {}
+export class RecuperarSenhaPageModule {}

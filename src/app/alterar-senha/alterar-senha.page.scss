@@ -1,0 +1,40 @@
+.tool-header{
+	--background: #a6ce39ff;
+	ion-button{
+		color: white;
+	}
+	ion-title{
+		color: white;
+		font-size: 28px;
+	}
+}
+.container{
+	padding-top: 10px;
+	margin-left: 13%;
+	width: 74%;
+	height: 100%;
+
+}
+
+.label{
+	
+	width: inherit;
+	height: inherit;
+	background-color: white;
+	color: black;
+	font-size: 18px;
+
+	
+}
+.label2{
+	width: inherit;
+	height: inherit;
+	background-color: white;
+	color: #8c0043ff;
+	font-size: 18px;
+	
+
+}
+.alterar{
+	width: 100%;
+}

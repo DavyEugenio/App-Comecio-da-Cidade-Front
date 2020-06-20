@@ -41,7 +41,19 @@ const routes: Routes = [
       },
       {
         path: 'add-estabelecimento',
-        loadChildren: () => import('../add-estabelecimento/add-estabelecimento.module').then( m => m.AddEstabelecimentoPageModule)
+        loadChildren: () => import('../add-estabelecimento/add-estabelecimento.module').then(m => m.AddEstabelecimentoPageModule)
+      },
+      {
+        path: 'gerenciar-produto-servico',
+        loadChildren: () => import('../gerenciar-produto-servico/gerenciar-produto-servico.module').then(m => m.GerenciarProdutoServicoPageModule)
+      },
+      {
+        path: 'alterar-senha',
+        loadChildren: () => import('../alterar-senha/alterar-senha.module').then(m => m.AlterarSenhaPageModule)
+      },
+      {
+        path: 'recuperar-senha',
+        loadChildren: () => import('../recuperar-senha/recuperar-senha.module').then(m => m.RecuperarSenhaPageModule)
       },
       {
         path: '',

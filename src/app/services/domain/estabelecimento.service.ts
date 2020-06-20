@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { EnderecoDTO } from 'src/app/models/endereco.dto';
 import { EstabelecimentoDTO } from 'src/app/models/estabelecimento.dto';
 import { API_CONFIG } from 'src/app/config/api.config';
 import { ImageUtilService } from './image-util.service';
+import { EnderecoDTO } from 'src/app/models/endereco.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +33,7 @@ export class EstabelecimentoService {
     );
   }
 
-  updateAddress(obj: EnderecoDTO, id: string) {
+  updateEndereco(obj: EnderecoDTO, id: string) {
     return this.http.put(
       `${API_CONFIG.baseUrl}/estabelecimentos/${id}/endereco`,
       obj,
@@ -56,7 +56,12 @@ export class EstabelecimentoService {
   }
 
   delete(id: string) {
-    return this.http.delete(`${API_CONFIG.baseUrl}/estabelecimentos/${id}`);
+    return this.http.delete(`${API_CONFIG.baseUrl}/estabelecimentos/${id}`,
+      {
+        observe: 'response',
+        responseType: 'text'
+      }
+    );
   }
 
   findByCidade(cidadeID: string): Observable<EstabelecimentoDTO[]> {
@@ -76,8 +81,14 @@ export class EstabelecimentoService {
     return this.http.get<EstabelecimentoDTO[]>(`${API_CONFIG.baseUrl}/estabelecimentos/${id}`);
   }
 
-  findByCategoria(cidadeId: string, categoriaId: string) {
-    return this.http.get<EstabelecimentoDTO[]>(`${API_CONFIG.baseUrl}/estabelecimentos/cidade/${cidadeId}/page?categorias=${categoriaId}`);
+  search(nome: string, cidadeId: string, categoriaId: string, page: number = 0, linesPerPage: number = 24) {
+    let url = "";
+    if (categoriaId == null) {
+      url = `${API_CONFIG.baseUrl}/estabelecimentos/cidade/${cidadeId}/page?page=${page}&linesPerPage=${linesPerPage}&nome=${nome}`
+    } else {
+      url = `${API_CONFIG.baseUrl}/estabelecimentos/cidade/${cidadeId}/page?page=${page}&linesPerPage=${linesPerPage}&categorias=${categoriaId}&nome=${nome}`
+    }
+    return this.http.get<EstabelecimentoDTO[]>(url);
   }
 
   upLoadPicture(picture, id: string) {
@@ -95,7 +106,11 @@ export class EstabelecimentoService {
   }
 
   deletePicture(id: string) {
-    return this.http.delete(`${API_CONFIG.baseUrl}/estabelecimentos/${id}/picture`);
+    return this.http.delete(`${API_CONFIG.baseUrl}/estabelecimentos/${id}/picture`,
+      {
+        observe: 'response',
+        responseType: 'text'
+      });
   }
 
   getImageFromServer(id: string): Observable<any> {

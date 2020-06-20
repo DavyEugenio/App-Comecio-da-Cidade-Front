@@ -16,7 +16,7 @@ import { AuthService } from './services/auth.service';
 import { StorageService } from './services/storage.service';
 import { UsuarioService } from './services/domain/usuario.service';
 import { ImageUtilService } from './services/domain/image-util.service';
-import { ProdutoService } from './services/domain/produtoServico.service';
+import { ProdutoServicoService } from './services/domain/produtoServico.service';
 import { PhotoService } from './services/photo.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
@@ -37,7 +37,7 @@ import { FormBuilder } from '@angular/forms';
     StorageService,
     UsuarioService,
     ImageUtilService,
-    ProdutoService,
+    ProdutoServicoService,
     PhotoService,
     FormBuilder
   ],

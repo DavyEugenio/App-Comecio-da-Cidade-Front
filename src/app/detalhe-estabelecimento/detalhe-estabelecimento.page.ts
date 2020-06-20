@@ -1,4 +1,4 @@
-import { ProdutoService } from 'src/app/services/domain/produtoServico.service';
+import { ProdutoServicoService } from 'src/app/services/domain/produtoServico.service';
 import { API_CONFIG } from 'src/app/config/api.config';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
@@ -23,7 +23,7 @@ export class DetalheEstabelecimentoPage implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private estabelecimentoService: EstabelecimentoService,
-    private produtoServicoService: ProdutoService) {
+    private produtoServicoService: ProdutoServicoService) {
 
     this.route.queryParams.subscribe(params => {
       let getNav = this.router.getCurrentNavigation();

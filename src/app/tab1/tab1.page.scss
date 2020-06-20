@@ -1,57 +1,58 @@
-.topo{
+.topo {
     width: 100%;
-    position:fixed;
+    position: fixed;
     top: 0;
-    color:black;
+    color: black;
     background-color: #a6ce39ff;
     background-size: contain;
     z-index: 2;
-    ion-searchbar{
+    ion-searchbar {
         --icon-color: #800;
-        --placeholder-color: #800;	
-        --placeholder-font-style:  ;
+        --placeholder-color: #800;
+        --placeholder-font-style: ;
         --border-radius: 10px;
     }
 }
-.categorias{
+.categorias {
     margin-top: 24%;
-    ion-slides{
+    ion-slides {
         margin-bottom: 8px;
-
     }
-    ion-slide{
-        margin-right: 10px;
-        width: 50px;
+    ion-slide {
+        width: calc(100% - 10px);
+        margin-left: 5px;
+        margin-bottom: 5px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        border-radius: 5px;
     }
 }
-ion-grid{
-  --ion-grid-padding: 0px;
-  --ion-grid-column-padding:0px;
+ion-grid {
+    --ion-grid-padding: 0px;
+    --ion-grid-column-padding: 0px;
 }
 
-
-.categoria-img{
+.categoria-img {
     max-width: 60px;
     max-height: 60px;
 }
 
-.label-row{
-   font-size: 1rem;
+.label-row {
+    font-size: 1rem;
 }
 
-.categoria-label{
-  position: relative;
-  margin-top: 5px;
-  font-size: 12px;
+.categoria-label {
+    position: relative;
+    margin-top: 5px;
+    font-size: 12px;
 }
 
-.categoria-chip{
+.categoria-chip {
     font-size: medium;
-   
 }
-.titulo2{
+.titulo2 {
     margin-top: 16%;
     margin-left: 14px;
-    color:#8c0043ff;
+    color: #8c0043ff;
     z-index: 2;
 }

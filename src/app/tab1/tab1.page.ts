@@ -13,12 +13,12 @@ import { StorageService } from 'src/app/services/storage.service';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
 })
-export class Tab1Page implements OnInit {
+export class Tab1Page {
   cidade: CidadeDTO;
   categorias: CategoriaDTO[] = [];
   estabelecimentos: EstabelecimentoDTO[] = [];
-  categoria: string = "";
-
+  categoria: CategoriaDTO;
+  nome: string = "";
   sliderOpts = {
     zoom: false,
     slidesPerView: 4,
@@ -32,29 +32,15 @@ export class Tab1Page implements OnInit {
     private categoriaService: CategoriaService,
     private estabelecimentoService: EstabelecimentoService,
     private storage: StorageService) {
-
-    let localCidade = this.storage.getLocalCidade();
-    if (localCidade == null) {
-      this.route.queryParams.subscribe(params => {
-        let getNav = this.router.getCurrentNavigation();
-        if (getNav.extras.state) {
-          this.cidade = getNav.extras.state.cidade;
-          this.storage.setLocalCidade(this.cidade);
-        }
-      });
-    }
-    else {
-      this.cidade = localCidade;
-    }
-
+    this.cidade = this.storage.getLocalCidade();
   }
-
-  ngOnInit() {
+  
+  ionViewDidEnter() {
+    this.cidade = this.storage.getLocalCidade();
     this.categoriaService.findAll().subscribe(
       response => {
         this.categorias = response;
         this.getImageOfCategoriaIfExists();
-        console.log(this.categorias);
       }
     );
     this.getEstabelecimentos();
@@ -70,7 +56,6 @@ export class Tab1Page implements OnInit {
   }
 
   detalheEstabelecimento(id: number) {
-    console.log(id);
     let dados: NavigationExtras = {
       state: {
         estabelecimentoID: id
@@ -81,6 +66,7 @@ export class Tab1Page implements OnInit {
 
   nullCidade() {
     this.storage.setLocalCidade(null);
+    this.router.navigate(['home']);
   }
 
   getImageOfEstabelecimentoIfExists() {
@@ -111,25 +97,29 @@ export class Tab1Page implements OnInit {
     }
   }
 
-  findByCategoria(categoriaObj: CategoriaDTO) {
-    this.categoria = categoriaObj.descricao;
+  changeCategoria(cat: CategoriaDTO) {
+    this.categoria = cat;
+    this.search();
+  }
 
-    console.log(categoriaObj.id);
-    this.estabelecimentoService.findByCategoria(this.cidade.id, categoriaObj.id)
+  clearCategoria() {
+    this.categoria = null;
+    this.getEstabelecimentos();
+  }
+
+  search() {
+    let categoriaId = null;
+    if (this.categoria != null) {
+      categoriaId = this.categoria.id;
+    }
+    this.estabelecimentoService.search(this.nome, this.cidade.id, categoriaId)
       .subscribe(
         response => {
-          console.log(response);
           this.estabelecimentos = response['content'];
           this.getImageOfEstabelecimentoIfExists();
         },
         error => {
-          console.log(error);
         }
       );
-  }
-
-  clearCategoria() {
-    this.categoria = "";
-    this.getEstabelecimentos();
   }
 }

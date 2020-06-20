@@ -60,12 +60,11 @@ export class ErrorInterceptor implements HttpInterceptor {
     async handle401() {
         const alert = await this.alertCtrl.create({
             header: 'Erro 401: Falha de autenticação',
-            message: 'Email ou senha incorretos',
+            message: 'Credenciais incorretas',
             backdropDismiss: false,
             buttons: [{
                 text: 'Ok'
             }]
-
         });
         await alert.present();
     }
