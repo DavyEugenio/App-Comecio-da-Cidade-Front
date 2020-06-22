@@ -5,8 +5,11 @@
 	}
 	ion-title{
 		color: white;
-		font-size: 28px;
+		font-size: 22px;
 	}
+}
+ion-content{
+    --background: white;
 }
 .container{
 	padding-top: 10px;
@@ -81,25 +84,20 @@ ion-input{
 
 }
 
-.label{
-	
+.label {
 	width: 100%;
 	height: inherit;
-	background-color: white;
 	color: black;
 	font-size: 18px;
 	margin-top: 10px;
-	
 }
-.label2{
+
+.label2 {
 	width: 100%;
 	height: inherit;
-	background-color: white;
 	color: #8c0043ff;
 	font-size: 18px;
-	
-
-}
+} 
 .add{
 	color: #b0b0b0;
 }

@@ -1,6 +1,9 @@
 ion-slides{
     height: 100%;
 }
+ion-content{
+    --background: white;
+}
 .formulario2{
     position: absolute;
     top: 5%; left: 0; right: 0;

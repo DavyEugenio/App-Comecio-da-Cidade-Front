@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class RecuperarSenhaPage implements OnInit {
 	emailDTO: EmailDTO = {
-    email: " "
+    email: ""
   };
   
   constructor(

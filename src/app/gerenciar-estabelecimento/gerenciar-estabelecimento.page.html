@@ -84,68 +84,60 @@
 				</ion-button>
 			</div>
 			<form [formGroup]="formEstabelecimento" (ngSubmit)="updateEstabelecimento(); $event.preventDefault()">
-				<ul class="informacoes">
-					<li>
-						<ion-item>
-							<ion-label class="label" position="floating">Nome</ion-label>
-							<ion-input class="label2" type="text" formControlName="nome"></ion-input>
-						</ion-item>
-					</li>
-					<li>
-						<ion-item>
-							<ion-label class="label" position="floating">CNPJ</ion-label>
-							<ion-input class="label2" type="number" formControlName="cnpj"></ion-input>
-						</ion-item>
-					</li>
-					<li>
-						<ion-item>
-							<ion-label class="label" position="floating">Funcionamento</ion-label>
-							<ion-textarea class="label2" type="text" formControlName="horario"></ion-textarea>
-						</ion-item>
-					</li>
-					<li class="label">Endereço</li>
-					<li class="label2">
-						<ion-button class="editarEndereco" (click)="editarEndereco(estabelecimento.endereco)" large>
-							Atualizar endereço</ion-button>
-					</li>
-					<li class="label sparator">Telefones</li>
-					<li>
-						<ion-item>
-							<ion-label class="label" position="fixed">Tel. 1</ion-label>
-							<ion-input class="label2" type="text" formControlName="telefone1"></ion-input>
-						</ion-item>
+				
+				<ion-item>
+					<ion-label class="label" position="floating">Nome</ion-label>
+					<ion-input class="label2" type="text" formControlName="nome"></ion-input>
+				</ion-item>
+					
+				<ion-item>
+					<ion-label class="label" position="floating">CNPJ</ion-label>
+					<ion-input class="label2" type="number" formControlName="cnpj"></ion-input>
+				</ion-item>
+					
+				<ion-item>
+					<ion-label class="label" position="floating">Funcionamento</ion-label>
+					<ion-textarea class="label2" type="text" formControlName="horario"></ion-textarea>
+				</ion-item>
+					
+				<p class="label">Endereço</p>
+				
+				<ion-button class="editarEndereco" (click)="editarEndereco(estabelecimento.endereco)" large>
+					Atualizar endereço</ion-button>
+				
+				<p class="label sparator">Telefones</p>
+				
+				<ion-item>
+					<ion-label class="label" position="fixed">Tel. 1</ion-label>
+					<ion-input class="label2" type="text" formControlName="telefone1"></ion-input>
+				</ion-item>
 
-					<li>
-						<ion-item>
-							<ion-label class="label" position="fixed">Tel. 2</ion-label>
-							<ion-input class="label2" type="text" formControlName="telefone2"></ion-input>
-						</ion-item>
-					</li>
-					<li>
-						<ion-item>
-							<ion-label class="label" position="fixed">Tel. 3</ion-label>
-							<ion-input class="label2" type="text" formControlName="telefone3"></ion-input>
-						</ion-item>
-					</li>
-					<li>
-						<ion-item>
-							<ion-label class="label" position="floating">Site</ion-label>
-							<ion-input class="label2" type="text" formControlName="site"></ion-input>
-						</ion-item>
-					</li>
-					<li>
-						<ion-item>
-							<ion-label class="label" position="floating">Instagram</ion-label>
-							<ion-input class="label2" type="text" formControlName="instagram"></ion-input>
-						</ion-item>
-					</li>
-					<li>
-						<ion-item>
-							<ion-label class="label" position="floating">Facebook</ion-label>
-							<ion-input class="label2" type="text" formControlName="facebook"></ion-input>
-						</ion-item>
-					</li>
-				</ul>
+				
+				<ion-item>
+					<ion-label class="label" position="fixed">Tel. 2</ion-label>
+					<ion-input class="label2" type="text" formControlName="telefone2"></ion-input>
+				</ion-item>
+				
+				<ion-item>
+					<ion-label class="label" position="fixed">Tel. 3</ion-label>
+					<ion-input class="label2" type="text" formControlName="telefone3"></ion-input>
+				</ion-item>
+				
+				<ion-item>
+					<ion-label class="label" position="floating">Site</ion-label>
+					<ion-input class="label2" type="text" formControlName="site"></ion-input>
+				</ion-item>
+				
+				<ion-item>
+					<ion-label class="label" position="floating">Instagram</ion-label>
+					<ion-input class="label2" type="text" formControlName="instagram"></ion-input>
+				</ion-item>
+		
+				<ion-item>
+					<ion-label class="label" position="floating">Facebook</ion-label>
+					<ion-input class="label2" type="text" formControlName="facebook"></ion-input>
+				</ion-item>
+					
 				<br>
 				<ion-button color="secondary" type="submit">Salvar</ion-button>
 				<ion-button color="danger" type="reset" (click)="cancelarEdicaoEstabelecimento()">Cancelar</ion-button>

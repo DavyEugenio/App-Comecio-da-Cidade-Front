@@ -5,8 +5,11 @@
 	}
 	ion-title {
 		color: white;
-		font-size: 28px;
+		font-size: 22px;
 	}
+}
+ion-content{
+    --background: white;
 }
 .container {
 	padding-top: 10px;
@@ -41,7 +44,7 @@
 	height: inherit;
 	background-color: white;
 	color: black;
-	font-size: 22px;
+	font-size: 18px;
 	margin-top: 10px;
 }
 
@@ -50,7 +53,7 @@
 	height: inherit;
 	background-color: white;
 	color: #8c0043ff;
-	font-size: 21px;
+	font-size: 18px;
 }
 
 .label3 {

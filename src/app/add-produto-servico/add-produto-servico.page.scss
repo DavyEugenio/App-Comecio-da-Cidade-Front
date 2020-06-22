@@ -5,9 +5,13 @@
     }
     ion-title {
         color: white;
-        font-size: 28px;
+        font-size: 22px;
     }
 }
+ion-content{
+    --background: white;
+}
+
 .container {
     padding-top: 10px;
     margin-left: 13%;

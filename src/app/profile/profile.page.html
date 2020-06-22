@@ -61,16 +61,17 @@
           <ion-icon class="icon-button font-s" name="camera"></ion-icon>
         </ion-button>
       </div>
-      <ul class="informacoes">
-        <li class="label">Nome</li>
-        <li class="label2 pad-l">
-          <ion-input [(ngModel)]="usuario.nome" autofocus></ion-input>
-        </li>
-        <li class="label">E-mail</li>
-        <li class="label2 pad-l">
-          <ion-input [(ngModel)]="usuario.email" inputmode="email" autofocus></ion-input>
-        </li>
-      </ul>
+      <ion-item>
+        <ion-label class="label" position="floating">None</ion-label>
+        <ion-input class="label2" [(ngModel)]="usuario.nome" autofocus></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label class="label" position="floating">E-amil</ion-label>
+        <ion-input class="label2" [(ngModel)]="usuario.email" inputmode="email" autofocus></ion-input>
+      </ion-item>
+
+      
       <hr>
       <ion-button color="secondary" (click)="confirmarEdicao()">Salvar</ion-button>
       <ion-button color="danger" (click)="cancelarEdicao()">Cancelar</ion-button>

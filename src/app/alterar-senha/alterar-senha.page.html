@@ -1,7 +1,7 @@
 <ion-header>
 	<ion-toolbar class="tool-header">
 		<ion-buttons>
-			<ion-button slot="start" href="/profile">
+			<ion-button slot="start" href="/tabs/profile">
 				<ion-icon name="arrow-back"></ion-icon>
 			</ion-button>
 			<ion-title>Voltar</ion-title>
@@ -14,16 +14,23 @@
 	<div class="container">
 		<h3>Aterar Senha</h3>
 		<br>
+
 		<ion-item>
-			<ion-input placeholder="Senha Antiga" class="label" [(ngModel)]="update.senhaAntiga" type="password"></ion-input>
+			<ion-label class="label" position="floating">Senha Antiga</ion-label>
+			<ion-input class="label" [(ngModel)]="update.senhaAntiga" type="password"></ion-input>
 		</ion-item>
+
 		<ion-item>
-			<ion-input placeholder="Nova Senha" class="label" [(ngModel)]="update.senhaNova" type="password"></ion-input>
+			<ion-label class="label" position="floating">Nova Senha</ion-label>
+			<ion-input class="label" [(ngModel)]="update.senhaNova" type="password"></ion-input>
 		</ion-item>
+
 		<ion-item>
-			<ion-input placeholder="Confirmar Nova Senha" class="label" [(ngModel)]="confirmarNovaSenha"
+			<ion-label class="label" position="floating">Comfirmar Nova Senha</ion-label>
+			<ion-input class="label" [(ngModel)]="confirmarNovaSenha"
 				type="password"></ion-input>
 		</ion-item>
+
 		<br>
 		<br>
 		<ion-button large class="alterar" (click)="alterar()">Alterar</ion-button>

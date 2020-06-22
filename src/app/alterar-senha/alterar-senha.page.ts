@@ -11,7 +11,10 @@ import { StorageService } from '../services/storage.service';
 	styleUrls: ['./alterar-senha.page.scss'],
 })
 export class AlterarSenhaPage implements OnInit {
-	update: SenhaUpdateDTO;
+	update: SenhaUpdateDTO = {
+		senhaAntiga: "",
+		senhaNova: ""
+	};
 	confirmarNovaSenha: string = "";
 
 	constructor(
@@ -20,7 +23,7 @@ export class AlterarSenhaPage implements OnInit {
 		private router: Router,
 		public storage: StorageService) {
 		this.carregarUsuario();
-		this.limparSenhas();
+		//this.limparSenhas();
 	}
 
 	carregarUsuario() {
@@ -46,10 +49,10 @@ export class AlterarSenhaPage implements OnInit {
 
 	limparSenhas() {
 		this.update = {
-			senhaAntiga: '',
-			senhaNova: ''
+			senhaAntiga: "",
+			senhaNova: ""
 		}
-		this.confirmarNovaSenha = '';
+		this.confirmarNovaSenha = "";
 	}
 
 	alterar() {

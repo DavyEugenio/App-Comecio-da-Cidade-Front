@@ -5,8 +5,11 @@
 	}
 	ion-title{
 		color: white;
-		font-size: 28px;
+		font-size: 22px;
 	}
+}
+ion-content{
+    --background: white;
 }
 .container{
 	padding-top: 10px;
@@ -16,24 +19,19 @@
 
 }
 
-.label{
-	
-	width: inherit;
+.label {
+	width: 100%;
 	height: inherit;
-	background-color: white;
 	color: black;
-	font-size: 18px;
-
-	
+	font-size: 18;
+	margin-top: 10px;
 }
-.label2{
-	width: inherit;
-	height: inherit;
-	background-color: white;
-	color: #8c0043ff;
-	font-size: 18px;
-	
 
+.label2 {
+	width: 100%;
+	height: inherit;
+	color: #8c0043ff;
+	font-size: 18;
 }
 .alterar{
 	width: 100%;
