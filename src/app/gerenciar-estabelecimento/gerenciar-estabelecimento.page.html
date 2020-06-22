@@ -22,40 +22,31 @@
 			<div>
 				<img class="imagem-estabelecimento" [src]="image">
 			</div>
-			<ul class="informacoes">
-				<li class="label">Funcionamento</li>
-				<li class="label2">
-					{{ estabelecimento.horario }}
-				</li>
-				<li class="label">Endereço</li>
-				<li class="label2">
-					{{ estabelecimento.endereco.cidade.nome }},
-					{{ estabelecimento.endereco.bairro }}
-					{{ estabelecimento.endereco.logradouro }}
-					<span *ngIf="estabelecimento.endereco.complemento">
-						{{ estabelecimento.endereco.complemento }},
-					</span>
-					numero {{ estabelecimento.endereco.numero }},
-					cep {{ estabelecimento.endereco.cep }}
-				</li>
-				<li class="label">Telefones para contato</li>
-				<li class="label2" *ngFor="let tel of estabelecimento.telefones">{{ tel }}</li>
-				<li class="label" *ngIf="estabelecimento.site">Site</li>
-				<li class="label2" *ngIf="estabelecimento.site">{{ estabelecimento.site }}</li>
-				<li class="label" *ngIf="estabelecimento.instagram">Instagram</li>
-				<li class="label2" *ngIf="estabelecimento.instagram">{{ estabelecimento.instagram }}</li>
-				<li class="label" *ngIf="estabelecimento.facebook">Facebook</li>
-				<li class="label2" *ngIf="estabelecimento.facebook">{{ estabelecimento.facebook }}</li>
-				<li class="label" *ngIf="estabelecimento.produtoServicos.length!==0">Produtos</li>
-			</ul>
+			<ion-label class="ion-text-wrap">
+				<ion-text color="primary">
+					<h1>{{ estabelecimento.nome }}</h1>
+					<h2>{{ estabelecimento.endereco.logradouro }},
+						<ng-container *ngIf="estabelecimento.endereco.complemento">
+							{{ estabelecimento.endereco.complemento }}.
+						</ng-container>
+						Número: {{ estabelecimento.endereco.numero }}</h2>
+					<h3>{{ estabelecimento.endereco.bairro }},{{ estabelecimento.endereco.cidade.nome }}</h3>
+					<h3>CEP {{ estabelecimento.endereco.cep }}</h3>
+				</ion-text>
+
+				<p *ngFor="let tel of estabelecimento.telefones">TEL: {{ tel }}</p>
+				<p>Funcionamento: {{ estabelecimento.horario }}.</p>
+				<p *ngIf="estabelecimento.instagram"> Instagram: {{ estabelecimento.instagram }} </p>
+				<p *ngIf="estabelecimento.facebook">Facebook: {{ estabelecimento.facebook }}</p>
+			</ion-label>
 			<div class="produtos" *ngIf="estabelecimento.produtoServicos.length!==0">
+				<ion-text color="primary">
+					<h1>Produtos</h1>
+				</ion-text>
 				<ion-slides [options]="sliderOpts">
-					<ion-slide class="produto" *ngFor="let produto of estabelecimento.produtoServicos"
+					<ion-slide *ngFor="let produto of estabelecimento.produtoServicos"
 						(click)="gerenciarProdutoServico(produto.id)">
-						<div class="card">
-							<img [src]="produto?.imageUrl" class="prodImage">
-							<h3 class="label">{{produto.nome}}</h3>
-						</div>
+						<img [src]="produto?.imageUrl">
 					</ion-slide>
 				</ion-slides>
 			</div>
@@ -84,60 +75,60 @@
 				</ion-button>
 			</div>
 			<form [formGroup]="formEstabelecimento" (ngSubmit)="updateEstabelecimento(); $event.preventDefault()">
-				
+
 				<ion-item>
 					<ion-label class="label" position="floating">Nome</ion-label>
 					<ion-input class="label2" type="text" formControlName="nome"></ion-input>
 				</ion-item>
-					
+
 				<ion-item>
 					<ion-label class="label" position="floating">CNPJ</ion-label>
 					<ion-input class="label2" type="number" formControlName="cnpj"></ion-input>
 				</ion-item>
-					
+
 				<ion-item>
 					<ion-label class="label" position="floating">Funcionamento</ion-label>
 					<ion-textarea class="label2" type="text" formControlName="horario"></ion-textarea>
 				</ion-item>
-					
+
 				<p class="label">Endereço</p>
-				
+
 				<ion-button class="editarEndereco" (click)="editarEndereco(estabelecimento.endereco)" large>
 					Atualizar endereço</ion-button>
-				
+
 				<p class="label sparator">Telefones</p>
-				
+
 				<ion-item>
 					<ion-label class="label" position="fixed">Tel. 1</ion-label>
 					<ion-input class="label2" type="text" formControlName="telefone1"></ion-input>
 				</ion-item>
 
-				
+
 				<ion-item>
 					<ion-label class="label" position="fixed">Tel. 2</ion-label>
 					<ion-input class="label2" type="text" formControlName="telefone2"></ion-input>
 				</ion-item>
-				
+
 				<ion-item>
 					<ion-label class="label" position="fixed">Tel. 3</ion-label>
 					<ion-input class="label2" type="text" formControlName="telefone3"></ion-input>
 				</ion-item>
-				
+
 				<ion-item>
 					<ion-label class="label" position="floating">Site</ion-label>
 					<ion-input class="label2" type="text" formControlName="site"></ion-input>
 				</ion-item>
-				
+
 				<ion-item>
 					<ion-label class="label" position="floating">Instagram</ion-label>
 					<ion-input class="label2" type="text" formControlName="instagram"></ion-input>
 				</ion-item>
-		
+
 				<ion-item>
 					<ion-label class="label" position="floating">Facebook</ion-label>
 					<ion-input class="label2" type="text" formControlName="facebook"></ion-input>
 				</ion-item>
-					
+
 				<br>
 				<ion-button color="secondary" type="submit">Salvar</ion-button>
 				<ion-button color="danger" type="reset" (click)="cancelarEdicaoEstabelecimento()">Cancelar</ion-button>
@@ -201,33 +192,20 @@
 			<div>
 				<img class="imagem-estabelecimento" src="/assets/img/sem_foto.png">
 			</div>
-			<ul class="informacoes">
-				<li class="label">Funcionamento</li>
-				<li>
-					<ion-skeleton-text animated class="loading-large"></ion-skeleton-text>
-				</li>
-				<li class="label">Endereço</li>
-				<li>
-					<ion-skeleton-text animated class="loading-large"></ion-skeleton-text>
-				</li>
-				<li class="label">Telefones para contato</li>
-				<li>
-					<ion-skeleton-text animated class="loading-small"></ion-skeleton-text>
-				</li>
-				<li class="label">Site</li>
-				<li>
-					<ion-skeleton-text animated class="loading-small"></ion-skeleton-text>
-				</li>
-				<li class="label">Instagram</li>
-				<li>
-					<ion-skeleton-text animated class="loading-medium"></ion-skeleton-text>
-				</li>
-				<li class="label">Facebook</li>
-				<li>
-					<ion-skeleton-text animated class="loading-medium"></ion-skeleton-text>
-				</li>
-				<li><span class="label">Produtos</span></li>
-			</ul>
+			<ion-label class="ion-text-wrap">
+				<ion-text color="primary">
+					<h1>Estabelecimento</h1>
+					<h2>Endereço</h2>
+					<h3>Bairro, Cidade</h3>
+					<h3>CEP</h3>
+				</ion-text>
+				<p>Telefones</p>
+				<p>Horário de Funcionamento</p>
+				<p>Redes sociais</p>
+				<ion-text color="primary">
+					<p>Produtos</p>
+				</ion-text>
+			</ion-label>
 			<br>
 		</div>
 	</div>

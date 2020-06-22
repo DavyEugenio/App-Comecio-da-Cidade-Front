@@ -16,22 +16,20 @@
 </ng-template>
 
 <ion-content>
-  
+
   <ng-container *ngIf="produtoServico; else loading">
     <div class="container">
       <div>
         <img class="imagem-produto" [src]="produtoServico?.imageUrl">
       </div>
-
       <ion-label class="ion-text-wrap">
-				<ion-text color="primary">
-				  <h1>{{produtoServico.nome }}</h1> 	
+        <ion-text color="primary">
+          <h1>{{produtoServico.nome }}</h1>
           <h2>{{produtoServico.preco}}$</h2>
         </ion-text>
         <p>{{produtoServico.descricao}}</p>
-			</ion-label>
+      </ion-label>
     </div>
-
   </ng-container>
 
   <ng-template #loading>
@@ -40,12 +38,12 @@
         <img class="imagem-produto" src="/assets/img/sem_foto.png">
       </div>
       <ion-label class="ion-text-wrap">
-				<ion-text color="primary">
-				  <h1>Produto</h1> 	
-				  <h2>Preço</h2>
+        <ion-text color="primary">
+          <h1>Produto</h1>
+          <h2>Preço</h2>
         </ion-text>
         <p>Descrição</p>
-      </ion-label>	
+      </ion-label>
     </div>
   </ng-template>
 </ion-content>

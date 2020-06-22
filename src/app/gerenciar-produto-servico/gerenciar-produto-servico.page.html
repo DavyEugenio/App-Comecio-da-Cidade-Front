@@ -21,20 +21,13 @@
 			<div>
 				<img class="imagem-estabelecimento" [src]="image">
 			</div>
-			<ul class="informacoes">
-				<li class="label">Nome</li>
-				<li class="label2">
-					{{ produtoServico.nome }}
-				</li>
-				<li class="label">Preço</li>
-				<li class="label2">
-					{{ produtoServico.preco }}
-				</li>
-				<li class="label" *ngIf="produtoServico.descricao">Descrição</li>
-				<li class="label2" *ngIf="produtoServico.descricao">
-					{{ produtoServico.descricao }}
-				</li>
-			</ul>
+			<ion-label class="ion-text-wrap">
+				<ion-text color="primary">
+					<h1>{{produtoServico.nome }}</h1>
+					<h2>{{produtoServico.preco}}$</h2>
+				</ion-text>
+				<p>{{produtoServico.descricao}}</p>
+			</ion-label>
 			<ion-button class="botao-util" color="primary" (click)="editar()" large>Editar</ion-button>
 			<ion-button class="botao-util" color="danger" (click)="alertConfirm()" large>Deletar</ion-button>
 			<br>
@@ -91,21 +84,13 @@
 			<div>
 				<img class="imagem-estabelecimento" src="/assets/img/sem_foto.png">
 			</div>
-
-			<ul class="informacoes">
-				<li class="label">Nome</li>
-				<li>
-					<ion-skeleton-text animated class="loading-large"></ion-skeleton-text>
-				</li>
-				<li class="label">Preço</li>
-				<li>
-					<ion-skeleton-text animated class="loading-large"></ion-skeleton-text>
-				</li>
-				<li class="label">Descrição</li>
-				<li>
-					<ion-skeleton-text animated class="loading-large"></ion-skeleton-text>
-				</li>
-			</ul>
+			<ion-label class="ion-text-wrap">
+				<ion-text color="primary">
+					<h1>Produto</h1>
+					<h2>Preço</h2>
+				</ion-text>
+				<p>Descrição</p>
+			</ion-label>
 			<br>
 		</div>
 	</div>

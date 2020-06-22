@@ -34,7 +34,7 @@
 				</ion-text>
 
 				<p *ngFor="let tel of estabelecimento.telefones">TEL: {{ tel }}</p>
-				<p>Funcionamento seg a sex das {{ estabelecimento.horario }}.</p>
+				<p>Funcionamento: {{ estabelecimento.horario }}.</p>
 				<p *ngIf="estabelecimento.instagram"> Instagram: {{ estabelecimento.instagram }} </p>
 				<p *ngIf="estabelecimento.facebook">Facebook: {{ estabelecimento.facebook }}</p>
 			</ion-label>
