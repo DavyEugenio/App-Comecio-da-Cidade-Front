@@ -1,15 +1,11 @@
 .tool-header {
-    --background: #a6ce39ff;
+    --background: #a6ce3ff9;
     ion-button {
-        color: white;
+        color: #fff;
     }
     ion-title {
-        color: white;
-        font-size: 22px;
+        color: #fff;
     }
-}
-ion-content{
-    --background: white;
 }
 .container {
     padding-top: 10px;
@@ -26,7 +22,6 @@ ion-content{
 }
 
 .produto-nome {
-    font-size: 30px;
     color: #8c0043ff;
 }
 
@@ -53,7 +48,6 @@ ion-content{
     height: inherit;
     background-color: white;
     color: #8c0043ff;
-    font-size: 21px;
 }
 
 /* loadings das informacoes */
@@ -75,3 +69,4 @@ ion-content{
     @extend .loading;
     width: 48%;
 }
+

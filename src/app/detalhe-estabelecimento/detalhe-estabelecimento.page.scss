@@ -1,109 +1,175 @@
-.tool-header {
+.tool-header{
 	--background: #a6ce39ff;
-	ion-button {
-		color: white;
-	}
-	ion-title {
-		color: white;
-		font-size: 22px;
+	--color: #fff;
+	
+	
+}
+
+.container{
+	padding: 5%;
+	width: 100%;
+	height: auto
+
+}
+
+.imagem-estabelecimento{
+	width: 100%;
+	height: 30%;
+}
+
+
+.estabelecimento-nome{
+	font-size: 30px;
+	color: #fff;
+}
+
+// informações
+.informacoes{
+	width: 100%;
+	height: auto;
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+
+}
+
+.label{
+	
+	width: 100%;
+	height: inherit;
+	background-color: white;
+	color: black;
+	font-size: 22px;
+	margin-top: 10px;
+	
+}
+
+.label2{
+	width: 100%;
+	height: inherit;
+	background-color: white;
+	color: #8c0043ff;
+	font-size: 21px;
+
+}
+
+.produtos{
+    ion-slides{       
+        margin-bottom: 20px;
+        margin-top: 5px;
+        ion-slide{
+        	border:1px rgba(00, 00, 00, 0.5); 
+        	border-radius: 20px;
+        	margin-left: 5px;
+        }
+    }
+}
+
+
+
+/* loadings das informacoes */
+
+.loading{
+	border-radius: 10px;
+	height: 30px;
+}
+
+.loading-large{
+	@extend .loading;
+	width: 80%;
+}
+.loading-medium{
+	@extend .loading;
+	width: 60%;
+}
+.loading-small{
+	@extend .loading;
+	width: 48%;
+
+	ion-button{
+		color: #8c0043ff;
 	}
 }
-ion-content{
-    --background: white;
-}
-.container {
+.container{
 	padding-top: 10px;
-	margin-left: 13%;
-	width: 74%;
+    margin-left: 13%;
+    width: 74%;
 	height: 100%;
 }
 
-.imagem-estabelecimento {
+.imagem-estabelecimento{
 	width: 100%;
 	height: 30%;
 	border-radius: 10px;
 	margin-bottom: 5px;
 }
 
-.estabelecimento-nome {
+
+.estabelecimento-nome{
 	font-size: 30px;
 	color: #8c0043ff;
 }
 
 // informações
-.informacoes {
+.informacoes{
 	width: 100%;
 	height: auto;
 	list-style-type: none;
 	padding: 0px;
 	margin: 0px;
+
 }
 
-.label {
+.label{
+	
 	width: 100%;
 	height: inherit;
 	background-color: white;
 	color: black;
-	font-size: 18px;
+	font-size: 22px;
 	margin-top: 10px;
+	
 }
 
-.label2 {
+.label2{
 	width: 100%;
 	height: inherit;
 	background-color: white;
 	color: #8c0043ff;
-	font-size: 18px;
+	font-size: 21px;
+
 }
 
-.label3 {
-	width: 100%;
-	height: inherit;
-	background-color: white;
-	color: black;
-	font-size: 80%;
-}
-.produtos {
-	ion-slides {
-		margin-bottom: 20px;
-		margin-top: 5px;
-
-		ion-slide {
-			border: 1px rgba(00, 00, 00, 0.5);
-			border-radius: 20px;
-			width: calc(100% - 9px);
-		}
-	}
+.produtos{
+    ion-slides{       
+        margin-bottom: 20px;
+        margin-top: 5px;
+        ion-slide{
+        	border:1px rgba(00, 00, 00, 0.5); 
+        	border-radius: 20px;
+        	margin-left: 5px;
+        }
+    }
 }
 
-.prodImage {
-	width: 100%;
-	border-radius: 5px 5px 0 0;
-	margin-bottom: -15%;
-}
-.card {
-	width: calc(100% - 5px);
-	height: 100%;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-	transition: 0.3s;
-	border-radius: 5px;
-}
+
+
 /* loadings das informacoes */
 
-.loading {
-	border-radius: 6px;
-	height: 20px;
+.loading{
+	border-radius: 10px;
+	height: 30px;
 }
 
-.loading-large {
+.loading-large{
 	@extend .loading;
 	width: 80%;
 }
-.loading-medium {
+.loading-medium{
 	@extend .loading;
 	width: 60%;
 }
-.loading-small {
+.loading-small{
 	@extend .loading;
 	width: 48%;
 }

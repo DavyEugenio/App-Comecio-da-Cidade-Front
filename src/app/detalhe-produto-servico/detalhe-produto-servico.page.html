@@ -4,7 +4,7 @@
       <ion-button slot="start" (click)="detalheEstabelecimento()">
         <ion-icon name="arrow-back"></ion-icon>
       </ion-button>
-      <ion-title *ngIf="produtoServico; else titleTemplate">{{ produtoServico.nome }}</ion-title>
+      <ion-title>Produto</ion-title>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -16,18 +16,20 @@
 </ng-template>
 
 <ion-content>
+  
   <ng-container *ngIf="produtoServico; else loading">
     <div class="container">
       <div>
         <img class="imagem-produto" [src]="produtoServico?.imageUrl">
       </div>
 
-      <ul class="informacoes">
-        <li class="label">Preço</li>
-        <li class="label2">R${{ produtoServico.preco }}</li>
-        <li class="label" *ngIf="produtoServico.descricao != null">Descrição</li>
-        <li class="label2" *ngIf="produtoServico.descricao != null">{{produtoServico.descricao}}</li>
-      </ul>
+      <ion-label class="ion-text-wrap">
+				<ion-text color="primary">
+				  <h1>{{produtoServico.nome }}</h1> 	
+          <h2>{{produtoServico.preco}}$</h2>
+        </ion-text>
+        <p>{{produtoServico.descricao}}</p>
+			</ion-label>
     </div>
 
   </ng-container>
@@ -37,16 +39,13 @@
       <div>
         <img class="imagem-produto" src="/assets/img/sem_foto.png">
       </div>
-      <ul class="informacoes">
-        <li class="label">Preço</li>
-        <li>
-          <ion-skeleton-text animated class="loading-large"></ion-skeleton-text>
-        </li>
-        <li class="label">Descrição</li>
-        <li>
-          <ion-skeleton-text animated class="loading-large"></ion-skeleton-text>
-        </li>
-      </ul>
+      <ion-label class="ion-text-wrap">
+				<ion-text color="primary">
+				  <h1>Produto</h1> 	
+				  <h2>Preço</h2>
+        </ion-text>
+        <p>Descrição</p>
+      </ion-label>	
     </div>
   </ng-template>
 </ion-content>
