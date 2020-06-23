@@ -4,30 +4,25 @@
 			<ion-button slot="start" (click)="gerenciarEstabelecimento()">
 				<ion-icon name="arrow-back"></ion-icon>
 			</ion-button>
-			<ion-title *ngIf="produtoServico; else titleTemplate">{{ produtoServico.nome }}</ion-title>
+			<ion-title>Produto</ion-title>
 		</ion-buttons>
 	</ion-toolbar>
 </ion-header>
-
-<ng-template #titleTemplate>
-	<ion-title>
-		<ion-skeleton-text animated class="loading-large"></ion-skeleton-text>
-	</ion-title>
-</ng-template>
 
 <ion-content>
 	<div *ngIf="produtoServico && !edit">
 		<div class="container">
 			<div>
-				<img class="imagem-estabelecimento" [src]="image">
+				<img class="imagem-produto" [src]="image">
 			</div>
 			<ion-label class="ion-text-wrap">
 				<ion-text color="primary">
 					<h1>{{produtoServico.nome }}</h1>
-					<h2>{{produtoServico.preco}}$</h2>
+					<h2>R${{produtoServico.preco}}</h2>
 				</ion-text>
 				<p>{{produtoServico.descricao}}</p>
 			</ion-label>
+			<br>
 			<ion-button class="botao-util" color="primary" (click)="editar()" large>Editar</ion-button>
 			<ion-button class="botao-util" color="danger" (click)="alertConfirm()" large>Deletar</ion-button>
 			<br>
@@ -38,9 +33,8 @@
 	<div *ngIf="produtoServico && edit">
 		<div class="container">
 			<div>
-				<img class="imagem-estabelecimento" [src]="image">
+				<img class="imagem-produto" [src]="image">
 			</div>
-
 			<div class="image-buttons">
 				<ion-button class="midia-button" (click)="deletePicture()" *ngIf="image != '/assets/img/sem_foto.png'">
 					<ion-icon class="icon-button font-s" name="trash-outline"></ion-icon>
@@ -70,19 +64,18 @@
 						</ion-item>
 					</li>
 				</ul>
-
-				<br>
-				<ion-button color="success" block type="submit">Salvar</ion-button>
-				<ion-button color="danger" block type="reset" (click)="cancelarEdicao()">Cancelar</ion-button>
+				<div class="form-buttons">
+					<ion-button class="form-button" color="success" block type="submit">Salvar</ion-button>
+					<ion-button class="form-button" color="danger" block type="reset" (click)="cancelarEdicao()">
+						Cancelar</ion-button>
+				</div>
 			</form>
 		</div>
 	</div>
-
 	<div *ngIf="!produtoServico">
 		<div class="container">
-
 			<div>
-				<img class="imagem-estabelecimento" src="/assets/img/sem_foto.png">
+				<img class="imagem-produto" src="/assets/img/sem_foto.png">
 			</div>
 			<ion-label class="ion-text-wrap">
 				<ion-text color="primary">

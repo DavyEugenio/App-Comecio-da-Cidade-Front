@@ -23,10 +23,10 @@
       </div>
       <div class="buttons">
         <ion-button class="midia-button mg-l" (click)="getCameraPicture()">
-          <ion-icon class="icon-button font-s" name="camera"></ion-icon>
+          <ion-icon class="font-s" name="camera"></ion-icon>
         </ion-button>
         <ion-button class="midia-button" *ngIf="photo != null" (click)="removeImage()">
-          <ion-icon class="icon-button" name="trash-outline"></ion-icon>
+          <ion-icon class="font-s" name="trash-outline"></ion-icon>
         </ion-button>
       </div>
       <form [formGroup]="formGroup" (ngSubmit)="addEstabelecimento(); $event.preventDefault()">
@@ -40,7 +40,7 @@
           <li>
             <ion-item>
               <ion-label class="label" position="floating">CNPJ</ion-label>
-              <ion-input class="label2" type="text" formControlName="cnpj"></ion-input>
+              <ion-input class="label2" type="text" placeholder="(apenas os números)" formControlName="cnpj"></ion-input>
             </ion-item>
           </li>
           <li>
@@ -63,13 +63,13 @@
           </li>
           <li>
             <ion-item>
-              <ion-label class="label" position="floating">*Horário de funcionamento</ion-label>
+              <ion-label class="label" position="floating">Horário de funcionamento*</ion-label>
               <ion-textarea class="label2" type="text" formControlName="horario"></ion-textarea>
             </ion-item>
           </li>
           <li>
             <ion-item>
-              <ion-label>*Categorias</ion-label>
+              <ion-label>Categorias*</ion-label>
               <ion-select multiple="true" formControlName="categorias" placeholder="Escolha no máximo 2">
                 <ion-select-option *ngFor="let categoria of categorias" [value]="categoria.id">
                   {{categoria.descricao}}
@@ -79,37 +79,37 @@
           </li>
           <li>
             <ion-item>
-              <ion-label class="label" position="floating">*Logradouro</ion-label>
+              <ion-label class="label" position="floating">Logradouro*</ion-label>
               <ion-input class="label2" formControlName="logradouro"></ion-input>
             </ion-item>
           </li>
           <li>
             <ion-item>
-              <ion-label class="label" position="floating">*Número</ion-label>
+              <ion-label class="label" position="floating">Número*</ion-label>
               <ion-input class="label2" formControlName="numero"></ion-input>
             </ion-item>
           </li>
           <li>
             <ion-item>
-              <ion-label class="label" position="floating">*Complemento</ion-label>
+              <ion-label class="label" position="floating">Complemento</ion-label>
               <ion-input class="label2" formControlName="complemento"></ion-input>
             </ion-item>
           </li>
           <li>
             <ion-item>
-              <ion-label class="label" position="floating">*Bairro</ion-label>
+              <ion-label class="label" position="floating">Bairro*</ion-label>
               <ion-input class="label2" formControlName="bairro"></ion-input>
             </ion-item>
           </li>
           <li>
             <ion-item>
-              <ion-label class="label" position="floating">*CEP</ion-label>
+              <ion-label class="label" position="floating">CEP*</ion-label>
               <ion-input class="label2" formControlName="cep"></ion-input>
             </ion-item>
           </li>
           <li>
             <ion-item>
-              <ion-label>*Cidade</ion-label>
+              <ion-label>Cidade*</ion-label>
               <ion-select formControlName="cidadeId">
                 <ion-select-option *ngFor="let cidade of cidades" value="{{cidade.id}}">
                   {{cidade.nome}}
@@ -119,7 +119,7 @@
           </li>
           <li>
             <ion-item>
-              <ion-label class="label" position="floating">*Telefone 1</ion-label>
+              <ion-label class="label" position="floating">Telefone 1*</ion-label>
               <ion-input class="label2" formControlName="telefone1"></ion-input>
             </ion-item>
           </li>
@@ -136,8 +136,10 @@
             </ion-item>
           </li>
         </ul>
-        <ion-button color="success" block type="submit">Salvar</ion-button>
-        <ion-button color="danger" block type="reset" (click)="cancelar()">Cancelar</ion-button>
+        <div class="form-buttons">
+          <ion-button class="form-button" color="success" block type="submit">Salvar</ion-button>
+          <ion-button class="form-button" color="danger" block type="reset" (click)="cancelar()">Cancelar</ion-button>
+        </div>
       </form>
     </div>
 

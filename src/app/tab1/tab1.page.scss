@@ -13,26 +13,26 @@
         --border-radius: 10px;
     }
 }
-ion-content{
+ion-content {
     --background: white;
 }
 .categorias {
-    margin-top: 24%;
+    margin-top: 85px;
     ion-slides {
         margin-bottom: 8px;
     }
     ion-slide {
-        width: calc(100% - 10px);
-        margin-left: 5px;
         margin-bottom: 5px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        transition: 0.3s;
-        border-radius: 5px;
     }
 }
 ion-grid {
     --ion-grid-padding: 0px;
     --ion-grid-column-padding: 0px;
+    margin-left: 2px;
+    margin-right: 2px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    border-radius: 5px;
 }
 
 .categoria-img {
@@ -48,6 +48,11 @@ ion-grid {
     position: relative;
     margin-top: 5px;
     font-size: 12px;
+}
+
+.icon {
+	font-size: 19px;
+	margin-bottom: -4px;
 }
 
 .categoria-chip {

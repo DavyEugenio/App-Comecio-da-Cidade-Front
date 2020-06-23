@@ -5,16 +5,17 @@
     }
     ion-title {
         color: white;
-        font-size: 22px;
     }
 }
+
 ion-content{
     --background: white;
 }
+
 .container {
     padding-top: 10px;
-    margin-left: 13%;
-    width: 74%;
+    width:90%;
+    margin: auto;
     height: 100%;
 }
 
@@ -26,7 +27,6 @@ ion-content{
 }
 
 .produto-nome {
-    font-size: 30px;
     color: #8c0043ff;
 }
 
@@ -44,7 +44,6 @@ ion-content{
     height: inherit;
     background-color: white;
     color: black;
-    font-size: 22px;
     margin-top: 10px;
 }
 
@@ -52,7 +51,6 @@ ion-content{
     width: 100%;
     height: inherit;
     color: #8c0043ff;
-    font-size: 21px;
 }
 
 .image-content{
@@ -78,8 +76,16 @@ ion-content{
     margin: auto;
 }
 
-.icon-button{
-	font-size: 22px;
+.form-buttons{
+    width: 100%;
+    display: flex;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-button {
+    margin: auto;
 }
 
 /* loadings das informacoes */
@@ -93,10 +99,12 @@ ion-content{
     @extend .loading;
     width: 80%;
 }
+
 .loading-medium {
     @extend .loading;
     width: 60%;
 }
+
 .loading-small {
     @extend .loading;
     width: 48%;

@@ -23,10 +23,10 @@
       </div>
       <div class="buttons">
         <ion-button class="midia-button mg-l" (click)="getCameraPicture()">
-          <ion-icon class="icon-button font-s" name="camera"></ion-icon>
+          <ion-icon class="font-s" name="camera"></ion-icon>
         </ion-button>
         <ion-button class="midia-button" *ngIf="photo != null" (click)="removeImage()">
-          <ion-icon class="icon-button" name="trash-outline"></ion-icon>
+          <ion-icon name="trash-outline"></ion-icon>
         </ion-button>
       </div>
       <form [formGroup]="formGroup" (ngSubmit)="addProdutoServico(); $event.preventDefault()">
@@ -36,8 +36,6 @@
               <ion-label class="label" position="floating">Nome*</ion-label>
               <ion-input class="label2" type="text" formControlName="nome"></ion-input>
             </ion-item>
-            <p class="danger" *ngIf="formGroup.controls.nome.dirty && formGroup.controls.nome.errors" margin-left>Valor
-              inválido</p>
           </li>
           <li>
             <ion-item>
@@ -50,12 +48,13 @@
               <ion-label class="label" position="floating">Descrição</ion-label>
               <ion-textarea class="label2" formControlName="descricao"></ion-textarea>
             </ion-item>
-            <p class="danger" *ngIf="formGroup.controls.descricao.dirty && formGroup.controls.descricao.errors"
-              margin-left>Valor inválido</p>
           </li>
         </ul>
-        <ion-button color="success" block type="submit" [disabled]="formGroup.invalid">Salvar</ion-button>
-        <ion-button color="danger" block type="reset" (click)="gerenciarEstabelecimento()">Cancelar</ion-button>
+        <div class="form-buttons">
+          <ion-button class="form-button" color="success" block type="submit">Salvar</ion-button>
+          <ion-button class="form-button" color="danger" block type="reset" (click)="gerenciarEstabelecimento()">
+            Cancelar</ion-button>
+        </div>
       </form>
     </div>
 

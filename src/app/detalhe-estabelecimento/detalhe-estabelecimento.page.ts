@@ -33,17 +33,41 @@ export class DetalheEstabelecimentoPage implements OnInit {
           .subscribe(
             response => {
               this.estabelecimento = response;
+              this.getTelefones();
               this.getImageOfEstabelecimentoIfExists();
               this.getImageOfProdutoServicoIfExists();
             },
             error => {
             }
           );
+      } else {
+        this.router.navigate(['tabs/tab1']);
       }
     });
   }
 
   ngOnInit() {
+  }
+
+  getTelefones() {
+    let telefones: string[] = [];
+    for (let i = 0; i < this.estabelecimento.telefones.length; i++) {
+      let tel = this.estabelecimento.telefones[i];
+      if (tel != null && tel.trim()) {
+        telefones.push(tel);
+      }
+    }
+    this.estabelecimento.telefone1 = telefones[0];
+    if (telefones[1] != null) {
+      this.estabelecimento.telefone2 = telefones[1];
+    } else {
+      this.estabelecimento.telefone2 = "";
+    }
+    if (telefones[2] != null) {
+      this.estabelecimento.telefone3 = telefones[2];
+    } else {
+      this.estabelecimento.telefone3 = "";
+    }
   }
 
   getImageOfEstabelecimentoIfExists() {

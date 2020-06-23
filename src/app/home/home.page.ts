@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationExtras } from '@angular/router';
+import { Router } from '@angular/router';
 import { CidadeService } from 'src/app/services/domain/cidade.service';
 import { CidadeDTO } from 'src/app/models/cidade.dto';
 import { StorageService } from 'src/app/services/storage.service';
@@ -33,6 +33,5 @@ export class HomePage implements OnInit {
 
   setCidade() {
     this.storage.setLocalCidade(this.cidadeSelecionada);
-    this.router.navigate(['./tabs/tab1']);
   }
 }

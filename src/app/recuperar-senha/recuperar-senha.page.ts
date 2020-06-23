@@ -10,50 +10,47 @@ import { Router } from '@angular/router';
   styleUrls: ['./recuperar-senha.page.scss'],
 })
 export class RecuperarSenhaPage implements OnInit {
-	emailDTO: EmailDTO = {
+  emailDTO: EmailDTO = {
     email: ""
   };
-  
+
   constructor(
-              private authService: AuthService,
-              private alertCtrl:  AlertController,
-              private router: Router ) { }
+    private authService: AuthService,
+    private alertCtrl: AlertController,
+    private router: Router) { }
 
   ngOnInit() {
   }
 
   recuperar() {
     console.log(this.emailDTO);
-   
-  	this.authService.recuperarSenha(this.emailDTO)
-    .subscribe(
-      response=>{
-        console.log("OK");
-        console.log(response);
-        this.successfully();
-      },
-      error=>{
-        console.log(error);
-      }
-    );
+
+    this.authService.recuperarSenha(this.emailDTO)
+      .subscribe(
+        response => {
+          console.log("OK");
+          console.log(response);
+          this.successfully();
+        },
+        error => {
+          console.log(error);
+        }
+      );
   }
 
   async successfully() {
     const alert = await this.alertCtrl.create({
       header: 'Recuperação De Senha',
-      message:`Um email com o link de recuperação foi enviado para ${this.emailDTO.email}`,
+      message: `Um email com o link de recuperação foi enviado para ${this.emailDTO.email}`,
       backdropDismiss: false,
       buttons: [{
-          text: 'Ok',
-          handler: data => {
-            this.router.navigate(['./tabs/tab2']);
-          }
+        text: 'Ok',
+        handler: data => {
+          this.router.navigate(['./tabs/tab2']);
+        }
       }]
 
-  });
-  await alert.present();
-  
+    });
+    await alert.present();
   }
-
-
 }

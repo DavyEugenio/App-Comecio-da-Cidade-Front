@@ -4,17 +4,10 @@
 			<ion-button slot="start" (click)="profile()">
 				<ion-icon name="arrow-back"></ion-icon>
 			</ion-button>
-			<ion-title *ngIf="estabelecimento; else titleTemplate">{{ estabelecimento.nome }}</ion-title>
+			<ion-title>Estabelecimento</ion-title>
 		</ion-buttons>
-
 	</ion-toolbar>
 </ion-header>
-
-<ng-template #titleTemplate>
-	<ion-title>
-		<ion-skeleton-text animated class="loading-large"></ion-skeleton-text>
-	</ion-title>
-</ng-template>
 
 <ion-content>
 	<div *ngIf="estabelecimento && !edit && !editEndereco">
@@ -33,11 +26,25 @@
 					<h3>{{ estabelecimento.endereco.bairro }},{{ estabelecimento.endereco.cidade.nome }}</h3>
 					<h3>CEP {{ estabelecimento.endereco.cep }}</h3>
 				</ion-text>
-
-				<p *ngFor="let tel of estabelecimento.telefones">TEL: {{ tel }}</p>
-				<p>Funcionamento: {{ estabelecimento.horario }}.</p>
-				<p *ngIf="estabelecimento.instagram"> Instagram: {{ estabelecimento.instagram }} </p>
-				<p *ngIf="estabelecimento.facebook">Facebook: {{ estabelecimento.facebook }}</p>
+				<p><ion-icon class="icon" name="time-outline"></ion-icon> Funcionamento: {{ estabelecimento.horario }}.</p>
+				<p *ngIf="estabelecimento.telefone1">
+					<ion-icon class="icon" name="call-outline"></ion-icon> {{ estabelecimento.telefone1 }}
+				</p>
+				<p *ngIf="estabelecimento.telefone2">
+					<ion-icon class="icon" name="call-outline"></ion-icon> {{ estabelecimento.telefone2 }}
+				</p>
+				<p *ngIf="estabelecimento.telefone3">
+					<ion-icon class="icon" name="call-outline"></ion-icon> {{ estabelecimento.telefone3 }}
+				</p>
+				<p *ngIf="estabelecimento.site">
+					<ion-icon class="icon" name="globe-outline"></ion-icon> {{ estabelecimento.site }}
+				</p>
+				<p *ngIf="estabelecimento.instagram">
+					<ion-icon class="icon" name="logo-instagram"></ion-icon> {{ estabelecimento.instagram }}
+				</p>
+				<p *ngIf="estabelecimento.facebook">
+					<ion-icon class="icon" name="logo-facebook"></ion-icon> {{ estabelecimento.facebook }}
+				</p>
 			</ion-label>
 			<div class="produtos" *ngIf="estabelecimento.produtoServicos.length!==0">
 				<ion-text color="primary">
@@ -46,7 +53,18 @@
 				<ion-slides [options]="sliderOpts">
 					<ion-slide *ngFor="let produto of estabelecimento.produtoServicos"
 						(click)="gerenciarProdutoServico(produto.id)">
-						<img [src]="produto?.imageUrl">
+						<ion-grid>
+							<ion-row class="image-row">
+								<ion-col class="ion-align-self-center">
+									<img class="produto-img" [src]="produto?.imageUrl">
+								</ion-col>
+							</ion-row>
+							<ion-row class="label-row" class="ion-align-items-center">
+								<ion-col class="ion-align-self-center">
+									<ion-label class="produto-label" small>{{ produto.nome }}</ion-label>
+								</ion-col>
+							</ion-row>
+						</ion-grid>
 					</ion-slide>
 				</ion-slides>
 			</div>
@@ -83,11 +101,11 @@
 
 				<ion-item>
 					<ion-label class="label" position="floating">CNPJ</ion-label>
-					<ion-input class="label2" type="number" formControlName="cnpj"></ion-input>
+					<ion-input class="label2" placeholder="(apenas os números)" type="number" formControlName="cnpj"></ion-input>
 				</ion-item>
 
 				<ion-item>
-					<ion-label class="label" position="floating">Funcionamento</ion-label>
+					<ion-label class="label" position="floating"><ion-icon class="icon" name="time-outline"></ion-icon> Funcionamento</ion-label>
 					<ion-textarea class="label2" type="text" formControlName="horario"></ion-textarea>
 				</ion-item>
 
@@ -99,39 +117,40 @@
 				<p class="label sparator">Telefones</p>
 
 				<ion-item>
-					<ion-label class="label" position="fixed">Tel. 1</ion-label>
+					<ion-label class="label" position="fixed"><ion-icon name="call-outline"></ion-icon></ion-label>
 					<ion-input class="label2" type="text" formControlName="telefone1"></ion-input>
 				</ion-item>
 
 
 				<ion-item>
-					<ion-label class="label" position="fixed">Tel. 2</ion-label>
+					<ion-label class="label" position="fixed"><ion-icon name="call-outline"></ion-icon></ion-label>
 					<ion-input class="label2" type="text" formControlName="telefone2"></ion-input>
 				</ion-item>
 
 				<ion-item>
-					<ion-label class="label" position="fixed">Tel. 3</ion-label>
+					<ion-label class="label" position="fixed"><ion-icon name="call-outline"></ion-icon></ion-label>
 					<ion-input class="label2" type="text" formControlName="telefone3"></ion-input>
 				</ion-item>
 
 				<ion-item>
-					<ion-label class="label" position="floating">Site</ion-label>
+					<ion-label class="label" position="fixed"><ion-icon name="globe-outline"></ion-icon></ion-label>
 					<ion-input class="label2" type="text" formControlName="site"></ion-input>
 				</ion-item>
 
 				<ion-item>
-					<ion-label class="label" position="floating">Instagram</ion-label>
+					<ion-label class="label" position="fixed"><ion-icon name="logo-instagram"></ion-icon></ion-label>
 					<ion-input class="label2" type="text" formControlName="instagram"></ion-input>
 				</ion-item>
 
 				<ion-item>
-					<ion-label class="label" position="floating">Facebook</ion-label>
+					<ion-label class="label" position="fixed"><ion-icon name="logo-facebook"></ion-icon></ion-label>
 					<ion-input class="label2" type="text" formControlName="facebook"></ion-input>
 				</ion-item>
-
-				<br>
-				<ion-button color="secondary" type="submit">Salvar</ion-button>
-				<ion-button color="danger" type="reset" (click)="cancelarEdicaoEstabelecimento()">Cancelar</ion-button>
+				<div class="form-buttons">
+					<ion-button class="form-button" color="success" block type="submit">Salvar</ion-button>
+					<ion-button class="form-button" color="danger" block type="reset"
+						(click)="cancelarEdicaoEstabelecimento()">Cancelar</ion-button>
+				</div>
 			</form>
 		</div>
 	</div>
@@ -181,8 +200,11 @@
 						</ion-item>
 					</li>
 				</ul>
-				<ion-button color="secondary" type="submit">Salvar</ion-button>
-				<ion-button color="danger" type="reset" (click)="cancelarEdicaoEndereco()">Cancelar</ion-button>
+				<div class="form-buttons">
+					<ion-button class="form-button" color="success" type="submit">Salvar</ion-button>
+					<ion-button class="form-button" color="danger" type="reset" (click)="cancelarEdicaoEndereco()">
+						Cancelar</ion-button>
+				</div>
 			</form>
 		</div>
 	</div>

@@ -79,7 +79,6 @@ export class GerenciarEstabelecimentoPage {
       .subscribe(
         response => {
           this.estabelecimento = response;
-          console.log(this.estabelecimento);
           this.getImageOfEstabelecimentoIfExists();
           this.getImageOfProdutoServicoIfExists();
           this.getTelefones();
@@ -111,14 +110,21 @@ export class GerenciarEstabelecimentoPage {
   }
 
   getTelefones() {
-    this.estabelecimento.telefone1 = this.estabelecimento.telefones[0];
-    if (this.estabelecimento.telefones[1] != null) {
-      this.estabelecimento.telefone2 = this.estabelecimento.telefones[1];
+    let telefones: string[] = [];
+    for (let i = 0; i < this.estabelecimento.telefones.length; i++) {
+      let tel = this.estabelecimento.telefones[i];
+      if (tel != null && tel.trim()) {
+        telefones.push(tel);
+      }
+    }
+    this.estabelecimento.telefone1 = telefones[0];
+    if (telefones[1] != null) {
+      this.estabelecimento.telefone2 = telefones[1];
     } else {
       this.estabelecimento.telefone2 = "";
     }
-    if (this.estabelecimento.telefones[2] != null) {
-      this.estabelecimento.telefone3 = this.estabelecimento.telefones[2];
+    if (telefones[2] != null) {
+      this.estabelecimento.telefone3 = telefones[2];
     } else {
       this.estabelecimento.telefone3 = "";
     }
@@ -140,7 +146,7 @@ export class GerenciarEstabelecimentoPage {
     this.editEndereco = false;
     this.formEstabelecimento.reset();
   }
-  
+
   cancelarEdicaoEndereco() {
     this.editEndereco = false;
     this.edit = true;

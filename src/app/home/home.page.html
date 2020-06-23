@@ -6,7 +6,7 @@
       cancelText="Cancelar">
       <ion-select-option *ngFor="let cidade of cidades" [value]="cidade">{{ cidade.nome }}</ion-select-option>
     </ion-select>
-    <ion-button (click)="setCidade()" expand="block">Entrar</ion-button>
+    <ion-button (click)="setCidade()" expand="block" href="/tabs">Entrar</ion-button>
   </div>
   <div class="rodape"></div>
 </ion-content>

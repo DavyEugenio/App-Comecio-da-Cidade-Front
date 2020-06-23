@@ -28,6 +28,8 @@ export class DetalheProdutoServicoPage implements OnInit {
             error => {
             }
           );
+      } else {
+        this.router.navigate(['tabs/tab1']);
       }
     });
   }

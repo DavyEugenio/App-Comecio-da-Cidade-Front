@@ -1,28 +1,21 @@
 <ion-header>
-  <ion-toolbar class="tool-header">
-    <ion-buttons>
-      <ion-button slot="start" href="/tabs/tab2">
-        <ion-icon name="arrow-back"></ion-icon>
-      </ion-button>
-      <ion-title>Voltar</ion-title>
-    </ion-buttons>
-  </ion-toolbar>
+	<ion-toolbar class="tool-header">
+		<ion-buttons>
+			<ion-button slot="start" [routerLink]="['/tabs/tab2']">
+				<ion-icon name="arrow-back"></ion-icon>
+			</ion-button>
+			<ion-title>Recuperação de Senha</ion-title>
+		</ion-buttons>
+	</ion-toolbar>
 </ion-header>
-
 
 <ion-content>
 	<div class="container">
-		<h3>Reupreção de Senha</h3>
-		<br>
-		<br>
 		<ion-item>
 			<ion-label class="label" position="floating">E-mail</ion-label>
 			<ion-input class="label" [(ngModel)]="emailDTO.email" type="email"></ion-input>
 		</ion-item>
 		<br>
-		<br>
 		<ion-button large class="botao-recuperar" (click)="recuperar()">Recuperar Senha</ion-button>
 	</div>
-		
-
 </ion-content>

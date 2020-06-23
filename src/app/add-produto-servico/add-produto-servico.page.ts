@@ -69,18 +69,22 @@ export class AddProdutoServicoPage implements OnInit {
 
   addProdutoServico() {
     this.formGroup.controls.estabelecimentoId.setValue(this.estabelecimentoID);
-    this.produtoServicoService.insert(this.formGroup.value)
-      .subscribe(response => {
-        if (this.photo != null) {
-          this.sendPicture(response.body);
-        }
-        this.formGroup.reset();
-        this.removeImage();
-        this.showInsertOk();
-      },
-        error => {
-        }
-      );
+    if (this.formGroup.valid) {
+      this.produtoServicoService.insert(this.formGroup.value)
+        .subscribe(response => {
+          if (this.photo != null) {
+            this.sendPicture(response.body);
+          }
+          this.formGroup.reset();
+          this.removeImage();
+          this.showInsertOk();
+        },
+          error => {
+          }
+        );
+    } else {
+      this.invalidFieldsAlert();
+    }
   }
 
   sendPicture(id) {
@@ -106,6 +110,28 @@ export class AddProdutoServicoPage implements OnInit {
       ]
     });
     await alert.present();
+  }
+
+  async invalidFieldsAlert() {
+    const alert = await this.alertCtrl.create({
+      header: 'Campos inválidos',
+      message: this.listErrors(),
+      backdropDismiss: false,
+      buttons: [{
+        text: 'Ok'
+      }]
+    });
+    await alert.present();
+  }
+
+  private listErrors(): string {
+    let s: string = '';
+    for (const field in this.formGroup.controls) {
+      if (this.formGroup.controls[field].invalid) {
+        s = s + '<p><strong>' + field + ': </strong>Valor inválido</p>';
+      }
+    }
+    return s;
   }
 
   gerenciarEstabelecimento() {

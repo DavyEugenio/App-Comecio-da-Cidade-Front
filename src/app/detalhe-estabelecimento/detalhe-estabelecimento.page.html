@@ -1,7 +1,7 @@
 <ion-header>
 	<ion-toolbar class="tool-header">
 		<ion-buttons>
-			<ion-button slot="start" href="tabs/tab1">
+			<ion-button slot="start" [routerLink]="['/tabs/tab1']">
 				<ion-icon name="arrow-back"></ion-icon>
 			</ion-button>
 			<ion-title>Estabelecimento</ion-title>
@@ -23,28 +23,42 @@
 			</div>
 			<ion-label class="ion-text-wrap">
 				<ion-text color="primary">
-				  <h1>{{ estabelecimento.nome }}</h1> 	
-				  <h2>{{ estabelecimento.endereco.logradouro }},
+					<h1>{{ estabelecimento.nome }}</h1>
+					<h2>{{ estabelecimento.endereco.logradouro }},
 						<ng-container *ngIf="estabelecimento.endereco.complemento">
 							{{ estabelecimento.endereco.complemento }}.
-					  	</ng-container>
-				  Número: {{ estabelecimento.endereco.numero }}</h2>
-				  <h3>{{ estabelecimento.endereco.bairro }},{{ estabelecimento.endereco.cidade.nome }}</h3>
-				  <h3>CEP {{ estabelecimento.endereco.cep }}</h3>  
+						</ng-container>
+						Número: {{ estabelecimento.endereco.numero }}</h2>
+					<h3>{{ estabelecimento.endereco.bairro }},{{ estabelecimento.endereco.cidade.nome }}</h3>
+					<h3>CEP {{ estabelecimento.endereco.cep }}</h3>
 				</ion-text>
-
-				<p *ngFor="let tel of estabelecimento.telefones">TEL: {{ tel }}</p>
-				<p>Funcionamento: {{ estabelecimento.horario }}.</p>
-				<p *ngIf="estabelecimento.instagram"> Instagram: {{ estabelecimento.instagram }} </p>
-				<p *ngIf="estabelecimento.facebook">Facebook: {{ estabelecimento.facebook }}</p>
+				<p><ion-icon class="icon" name="time-outline"></ion-icon> Funcionamento: {{ estabelecimento.horario }}.</p>
+				<p *ngIf="estabelecimento.telefone1"><ion-icon class="icon" name="call-outline"></ion-icon> {{ estabelecimento.telefone1 }}</p>
+				<p *ngIf="estabelecimento.telefone2"><ion-icon class="icon" name="call-outline"></ion-icon> {{ estabelecimento.telefone2 }}</p>
+				<p *ngIf="estabelecimento.telefone3"><ion-icon class="icon" name="call-outline"></ion-icon> {{ estabelecimento.telefone3 }}</p>
+				<p *ngIf="estabelecimento.site"><ion-icon class="icon" name="globe-outline"></ion-icon> {{ estabelecimento.site }}</p>
+				<p *ngIf="estabelecimento.instagram"><ion-icon class="icon" name="logo-instagram"></ion-icon> {{ estabelecimento.instagram }} </p>
+				<p *ngIf="estabelecimento.facebook"><ion-icon class="icon" name="logo-facebook"></ion-icon> {{ estabelecimento.facebook }}</p>
 			</ion-label>
 			<div class="produtos" *ngIf="estabelecimento.produtoServicos.length!==0">
 				<ion-text color="primary">
 					<h1>Produtos</h1>
 				</ion-text>
 				<ion-slides [options]="sliderOpts">
-					<ion-slide *ngFor="let produto of estabelecimento.produtoServicos" (click)="detalheProduto(produto.id)">
-						<img [src]="produto?.imageUrl">
+					<ion-slide *ngFor="let produto of estabelecimento.produtoServicos"
+						(click)="detalheProduto(produto.id)">
+						<ion-grid>
+							<ion-row class="image-row">
+								<ion-col class="ion-align-self-center">
+									<img class="produto-img" [src]="produto?.imageUrl">
+								</ion-col>
+							</ion-row>
+							<ion-row class="label-row" class="ion-align-items-center">
+								<ion-col class="ion-align-self-center">
+									<ion-label class="produto-label" small>{{ produto.nome }}</ion-label>
+								</ion-col>
+							</ion-row>
+						</ion-grid>
 					</ion-slide>
 				</ion-slides>
 			</div>
@@ -58,10 +72,10 @@
 			</div>
 			<ion-label class="ion-text-wrap">
 				<ion-text color="primary">
-				  <h1>Estabelecimento</h1> 	
-				  <h2>Endereço</h2>
-				  <h3>Bairro, Cidade</h3>
-				  <h3>CEP</h3>  
+					<h1>Estabelecimento</h1>
+					<h2>Endereço</h2>
+					<h3>Bairro, Cidade</h3>
+					<h3>CEP</h3>
 				</ion-text>
 				<p>Telefones</p>
 				<p>Horário de Funcionamento</p>
@@ -69,7 +83,7 @@
 				<ion-text color="primary">
 					<p>Produtos</p>
 				</ion-text>
-			</ion-label>			
+			</ion-label>
 		</div>
 	</ng-template>
 </ion-content>

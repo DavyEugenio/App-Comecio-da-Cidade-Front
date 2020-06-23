@@ -1,22 +1,23 @@
-.tool-header{
+.tool-header {
 	--background: #a6ce39ff;
-	ion-button{
+	ion-button {
 		color: white;
 	}
-	ion-title{
+	ion-title {
 		color: white;
 		font-size: 22px;
 	}
 }
-ion-content{
-    --background: white;
-}
-.container{
-	padding-top: 10px;
-	margin-left: 13%;
-	width: 74%;
-	height: 100%;
 
+ion-content {
+	--background: white;
+}
+
+.container {
+	padding-top: 10px;
+	margin: auto;
+	width: 85%;
+	height: 100%;
 }
 
 .label {
@@ -33,6 +34,6 @@ ion-content{
 	color: #8c0043ff;
 	font-size: 18;
 }
-.alterar{
+.alterar {
 	width: 100%;
 }

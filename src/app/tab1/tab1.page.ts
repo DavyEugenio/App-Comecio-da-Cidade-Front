@@ -33,6 +33,7 @@ export class Tab1Page {
     private estabelecimentoService: EstabelecimentoService,
     private storage: StorageService) {
     this.cidade = this.storage.getLocalCidade();
+    this.getEstabelecimentos();
   }
   
   ionViewDidEnter() {

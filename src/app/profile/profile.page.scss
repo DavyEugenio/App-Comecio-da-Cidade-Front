@@ -1,34 +1,32 @@
-.tool-header{
+.tool-header {
 	--background: #a6ce39ff;
-	ion-button{
+	ion-button {
 		color: white;
 	}
-	ion-title{
+	ion-title {
 		color: white;
 		font-size: 22px;
 	}
 }
-ion-content{
-    --background: white;
+ion-content {
+	--background: white;
 }
-.container{
+.container {
 	padding-top: 10px;
 	margin-left: 13%;
 	width: 74%;
 	height: 100%;
-
 }
 
-
-.image-content{
+.image-content {
 	width: 200px;
 	height: 200px;
-	margin-left: 12.4%;
+	margin: auto;
 	border-radius: 100px;
 
 	border-style: none;
 }
-.imagem-usuario{
+.imagem-usuario {
 	width: 200px;
 	height: 200px;
 	//margin-left: 12.4%;
@@ -37,8 +35,9 @@ ion-content{
 }
 
 // edicao
-.edit-button{
-	margin-left: 23.7%;
+.edit-button {
+	margin: auto;
+	display: flex;
 	--background: white;
 	--border-width: 0px;
 	--padding-start: 3px;
@@ -47,41 +46,53 @@ ion-content{
 	font-size: small;
 	--color: #b0b0b0;
 	width: 140px;
-	height: 30px
-
+	height: 30px;
 }
 
-.buttons{
+.buttons {
 	width: 200px;
 	height: inherit;
-	margin-left: 12.4%;
+	margin: auto;
+	display: flex;
 }
 
-.midia-button{
+.midia-button {
 	--background: #fff;
 	--border-style: none;
-	--box-shadow: none; 
+	--box-shadow: none;
 	width: 60px;
 	--color: #000;
 }
 
-.icon-button{
+.icon-button {
 	font-size: 22px;
 }
 
-ion-input{
+.form-buttons {
+	width: 100%;
+	display: flex;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.form-button {
+	margin: auto;
+}
+
+ion-input {
 	--padding-top: 0px;
 	--padding-bottom: 0px;
 }
 
-// 
-.informacoes{
+//
+.informacoes {
 	width: 100%;
 	height: auto;
 	list-style-type: none;
 	padding: 0px;
 	margin: 0px;
-
 }
 
 .label {
@@ -97,31 +108,29 @@ ion-input{
 	height: inherit;
 	color: #8c0043ff;
 	font-size: 18px;
-} 
-.add{
+}
+.add {
 	color: #b0b0b0;
 }
 
 // classes para ajustes
-.mg-l{
+.mg-l {
 	margin-left: 74px;
 }
-.pad-l{
+.pad-l {
 	padding-left: 10px;
 }
-.font-s{
+.font-s {
 	font-size: 26px;
 }
 //
 
-
-.loading-large{
+.loading-large {
 	width: 80%;
 	border-radius: 6px;
 	height: 20px;
 }
-ion-item{
+ion-item {
 	--color: #8c0043ff;
 	--inner-padding-start: 0px;
-	
 }

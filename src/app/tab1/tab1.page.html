@@ -45,9 +45,9 @@
         <ion-text color="primary">
           <h2>{{ estabelecimento.nome }}</h2>
         </ion-text>
-        <p>TEL: {{ estabelecimento.telefone1 }}</p>
+        <p><ion-icon class="icon" name="call-outline"></ion-icon> {{ estabelecimento.telefone1 }}</p>
         <ion-text color="secondary">
-          <p>Funcionamento seg a sex das {{ estabelecimento.horario }}.</p>
+          <p>Funcionamento: {{ estabelecimento.horario }}.</p>
         </ion-text>
       </ion-label>
     </ion-item>

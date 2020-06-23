@@ -23,7 +23,7 @@ export class AlterarSenhaPage implements OnInit {
 		private router: Router,
 		public storage: StorageService) {
 		this.carregarUsuario();
-		//this.limparSenhas();
+		this.limparSenhas();
 	}
 
 	carregarUsuario() {

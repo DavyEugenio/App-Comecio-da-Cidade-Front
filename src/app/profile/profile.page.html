@@ -70,11 +70,10 @@
         <ion-label class="label" position="floating">E-amil</ion-label>
         <ion-input class="label2" [(ngModel)]="usuario.email" inputmode="email" autofocus></ion-input>
       </ion-item>
-
-      
-      <hr>
-      <ion-button color="secondary" (click)="confirmarEdicao()">Salvar</ion-button>
-      <ion-button color="danger" (click)="cancelarEdicao()">Cancelar</ion-button>
+      <div class="form-buttons">
+        <ion-button class="form-button" color="success" (click)="confirmarEdicao()">Salvar</ion-button>
+        <ion-button class="form-button" color="danger" (click)="cancelarEdicao()">Cancelar</ion-button>
+      </div>
     </div>
     <!-- template de loading -->
     <div *ngIf="!usuario">
