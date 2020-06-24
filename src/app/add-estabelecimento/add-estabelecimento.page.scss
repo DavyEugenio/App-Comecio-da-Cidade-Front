@@ -8,13 +8,13 @@
     }
 }
 
-ion-content{
+ion-content {
     --background: white;
 }
 
 .container {
     padding-top: 10px;
-    width:90%;
+    width: 90%;
     margin: auto;
     height: 100%;
 }
@@ -53,30 +53,30 @@ ion-content{
     color: #8c0043ff;
 }
 
-.image-content{
-	width: 200px;
-	height: 200px;
-	margin: auto;
-	border-radius: 100px;
-	border-style: none;
+.image-content {
+    width: 200px;
+    height: 200px;
+    margin: auto;
+    border-radius: 100px;
+    border-style: none;
 }
 
-.buttons{
-	width: 200px;
+.buttons {
+    width: 200px;
     display: flex;
-	margin: auto;
+    margin: auto;
 }
 
-.midia-button{
-	--background: #fff;
-	--border-style: none;
-	--box-shadow: none; 
-	width: 60px;
+.midia-button {
+    --background: #fff;
+    --border-style: none;
+    --box-shadow: none;
+    width: 60px;
     --color: #000;
     margin: auto;
 }
 
-.form-buttons{
+.form-buttons {
     width: 100%;
     display: flex;
     margin-top: 20px;
@@ -88,6 +88,10 @@ ion-content{
     margin: auto;
 }
 
+.icon {
+    font-size: 22px;
+    margin-bottom: -4px;
+}
 /* loadings das informacoes */
 
 .loading {

@@ -23,7 +23,7 @@ export class Tab2Page implements OnInit {
     public UsuarioService: UsuarioService,
     private tabs: TabsPage) {
     this.formGroup = this.formBuilder.group({
-      nome: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
+      nome: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(120)]],
       cpf: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
       email: ['', [Validators.required, Validators.email]],
       senha: ['', [Validators.required, Validators.minLength(8)]],
@@ -78,12 +78,63 @@ export class Tab2Page implements OnInit {
   private listErrors(): string {
     let s: string = '';
     for (const field in this.formGroup.controls) {
-      if (this.formGroup.controls[field].invalid) {
-        s = s + '<p><strong>' + field + ': </strong>Valor inválido</p>';
+      if (this.formGroup.controls[field].invalid || this.compararSenhas()) {
+        let value = this.formGroup.controls[field].value;
+        let length: number = value.length;
+        switch (field) {
+          case 'nome':
+            if (!value) {
+              s = s + '<p><strong>Nome: </strong>Preenchimento obrigatório</p>';
+            } else {
+              if (length < 4 || length > 120) {
+                s = s + '<p><strong>Nome: </strong>O nome deve conter entre 4 e 120 caráteres</p>';
+              }
+            }
+            break;
+          case 'cpf':
+            if (!value) {
+              s = s + '<p><strong>CPF: </strong>Preenchimento obrigatório</p>';
+            } else {
+              if (length != 11) {
+                s = s + '<p><strong>CPF: </strong>O CPF deve conter 11 caráteres</p>';
+              }
+            }
+            break;
+          case 'email':
+            if (!value) {
+              s = s + '<p><strong>Email: </strong>Preenchimento obrigatório</p>';
+            } else {
+              s = s + '<p><strong>Email: </strong>Email inválido</p>';
+            }
+            break;
+          case 'senha':
+            if (!value) {
+              s = s + '<p><strong>Senha: </strong>Preenchimento obrigatório</p>';
+            } else {
+              if (length < 8) {
+                s = s + '<p><strong>Senha: </strong>A senha deve conter no mínimo 8 caráteres</p>';
+              }
+            }
+            break;
+          case 'confirmarSenha':
+            if (!value) {
+              s = s + '<p><strong>Confirmar Senha: </strong>Preenchimento obrigatório</p>';
+            } else {
+              if (length < 8) {
+                s = s + '<p><strong>Confirmar Senha: </strong>A senha deve conter no mínimo 8 caráteres</p>';
+              } else {
+                if (!this.compararSenhas()) {
+                  s = s + '<p><strong>Confirmar Senha: </strong>Senhas não coincidem</p>';
+                }
+              }
+            }
+            break;
+          default:
+            s = s + '<p><strong>' + field + ': </strong>Valor inválido</p>';
+            break;
+
+        }
       }
-    }
-    if (!this.compararSenhas()) {
-      s = s + '<p><strong>confirmarSenha: </strong>Senhas não coincidem</p>';
     }
     return s;
   }
@@ -131,5 +182,4 @@ export class Tab2Page implements OnInit {
     });
     await alert.present();
   }
-
 }

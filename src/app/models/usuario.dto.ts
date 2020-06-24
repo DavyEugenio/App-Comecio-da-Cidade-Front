@@ -1,4 +1,3 @@
-import { EnderecoDTO } from './endereco.dto';
 import { EstabelecimentoDTO } from './estabelecimento.dto';
 
 export interface UsuarioDTO {
@@ -7,6 +6,5 @@ export interface UsuarioDTO {
     email: string;
     cpf: string;
     estabelecimentos?: EstabelecimentoDTO[];
-    endereco?: EnderecoDTO;
     imageUrl?: string;
 }

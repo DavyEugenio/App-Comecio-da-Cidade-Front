@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { EstabelecimentoDTO } from 'src/app/models/estabelecimento.dto';
-import { EnderecoDTO } from 'src/app/models/endereco.dto';
 import { CidadeDTO } from 'src/app/models/cidade.dto';
 import { EstabelecimentoService } from 'src/app/services/domain/estabelecimento.service';
 import { PhotoService } from 'src/app/services/photo.service';
@@ -54,7 +53,7 @@ export class GerenciarEstabelecimentoPage {
       }
     });
     this.formEstabelecimento = this.formBuilder.group({
-      nome: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
+      nome: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(120)]],
       cnpj: ['', [Validators.minLength(14), Validators.maxLength(14)]],
       instagram: ['', []],
       facebook: ['', []],
@@ -291,7 +290,89 @@ export class GerenciarEstabelecimentoPage {
     let s: string = '';
     for (const field in formGroup.controls) {
       if (formGroup.controls[field].invalid) {
-        s = s + '<p><strong>' + field + ': </strong>Valor inválido</p>';
+        let value = formGroup.controls[field].value;
+        let length: number = value.length;
+        console.log(length);
+        switch (field) {
+          case 'nome':
+            if (!value) {
+              s = s + '<p><strong>Nome: </strong>Preenchimento obrigatório</p>';
+            } else {
+              if (length < 4 || length > 120) {
+                s = s + '<p><strong>Nome: </strong>O nome deve conter entre 4 e 120 caráteres</p>';
+              }
+            }
+            break;
+          case 'cnpj':
+            if (length != 14) {
+              s = s + '<p><strong>CNPJ: </strong>O CNPJ deve conter 14 caráteres</p>';
+            }
+            break;
+          case 'horario':
+            if (!value) {
+              s = s + '<p><strong>Horário: </strong>Preenchimento obrigatório</p>';
+            }
+            break;
+          case 'cidadeId':
+            if (!value) {
+              s = s + '<p><strong>Cidade: </strong>Preenchimento obrigatório</p>';
+            }
+            break;
+          case 'logradouro':
+            if (!value) {
+              s = s + '<p><strong>Logradouro: </strong>Preenchimento obrigatório</p>';
+            }
+            break;
+          case 'numero':
+            if (!value) {
+              s = s + '<p><strong>Número: </strong>Preenchimento obrigatório</p>';
+            }
+            break;
+          case 'bairro':
+            if (!value) {
+              s = s + '<p><strong>Bairro: </strong>Preenchimento obrigatório</p>';
+            }
+            break;
+          case 'cep':
+            if (!value) {
+              s = s + '<p><strong>CEP: </strong>Preenchimento obrigatório</p>';
+            } else {
+              if (length < 8 || length > 9) {
+                s = s + '<p><strong>CEP: </strong>O nome deve conter entre 8 e 9 caráteres</p>';
+              }
+            }
+            break;
+          case 'telefone1':
+            if (!value) {
+              s = s + '<p><strong>Telefone 1: </strong>Preenchimento obrigatório</p>';
+            } else {
+              if (length < 9 || length > 13) {
+                s = s + '<p><strong>Telefone 1: </strong>O telefone deve conter entre 8 e 9 caráteres</p>';
+              }
+            }
+            break;
+          case 'telefone2':
+            if (!value) {
+              s = s + '<p><strong>Telefone 2: </strong>Preenchimento obrigatório</p>';
+            } else {
+              if (length < 9 || length > 13) {
+                s = s + '<p><strong>Telefone 2: </strong>O telefone deve conter entre 8 e 9 caráteres</p>';
+              }
+            }
+            break;
+          case 'telefone3':
+            if (!value) {
+              s = s + '<p><strong>Telefone 3: </strong>Preenchimento obrigatório</p>';
+            } else {
+              if (length < 9 || length > 13) {
+                s = s + '<p><strong>Telefone 3: </strong>O telefone deve conter entre 8 e 9 caráteres</p>';
+              }
+            }
+            break;
+          default:
+            s = s + '<p><strong>' + field + ': </strong>Valor inválido</p>';
+            break;
+        }
       }
     }
     return s;

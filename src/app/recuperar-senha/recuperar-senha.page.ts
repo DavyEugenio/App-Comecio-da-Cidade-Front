@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { EmailDTO } from 'src/app/models/email.dto';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-recuperar-senha',
@@ -10,38 +10,60 @@ import { Router } from '@angular/router';
   styleUrls: ['./recuperar-senha.page.scss'],
 })
 export class RecuperarSenhaPage implements OnInit {
-  emailDTO: EmailDTO = {
-    email: ""
-  };
+  formGroup: FormGroup;
 
   constructor(
+    private formBuilder: FormBuilder,
     private authService: AuthService,
     private alertCtrl: AlertController,
-    private router: Router) { }
+    private router: Router) {
+    this.formGroup = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]]
+    });
+  }
 
   ngOnInit() {
   }
 
   recuperar() {
-    console.log(this.emailDTO);
+    if (this.formGroup.controls.email.valid) {
+      this.authService.recuperarSenha(this.formGroup.value)
+        .subscribe(
+          response => {
+            this.successfully();
+          },
+          error => {
+          }
+        );
+    } else {
+      this.invalidFieldsAlert();
+    }
+  }
 
-    this.authService.recuperarSenha(this.emailDTO)
-      .subscribe(
-        response => {
-          console.log("OK");
-          console.log(response);
-          this.successfully();
-        },
-        error => {
-          console.log(error);
-        }
-      );
+  async invalidFieldsAlert() {
+    const alert = await this.alertCtrl.create({
+      header: 'Campo inválido',
+      message: this.error(),
+      backdropDismiss: false,
+      buttons: [{
+        text: 'Ok'
+      }]
+    });
+    await alert.present();
+  }
+
+  error() {
+    if (!this.formGroup.controls.email) {
+      return "<strong>Email: </strong>Preenchimento obrigatório"
+    } else {
+      return "<strong>Email: </strong>Email inválido"
+    }
   }
 
   async successfully() {
     const alert = await this.alertCtrl.create({
       header: 'Recuperação De Senha',
-      message: `Um email com o link de recuperação foi enviado para ${this.emailDTO.email}`,
+      message: `Um email com o link de recuperação foi enviado para ${this.formGroup.controls.email.value}`,
       backdropDismiss: false,
       buttons: [{
         text: 'Ok',

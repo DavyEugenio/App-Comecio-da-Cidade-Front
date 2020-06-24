@@ -1,11 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-
 import { AlterarSenhaPageRoutingModule } from './alterar-senha-routing.module';
-
 import { AlterarSenhaPage } from './alterar-senha.page';
 
 @NgModule({
@@ -13,7 +10,8 @@ import { AlterarSenhaPage } from './alterar-senha.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    AlterarSenhaPageRoutingModule
+    AlterarSenhaPageRoutingModule,
+    ReactiveFormsModule
   ],
   declarations: [AlterarSenhaPage]
 })

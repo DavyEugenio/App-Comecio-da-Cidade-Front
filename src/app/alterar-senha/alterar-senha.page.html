@@ -1,7 +1,7 @@
 <ion-header>
 	<ion-toolbar class="tool-header">
 		<ion-buttons>
-			<ion-button slot="start" [routerLink]="['/tabs/profile']" (click)="limparSenhas()">
+			<ion-button slot="start" [routerLink]="['/tabs/profile']" (click)="cancelar()">
 				<ion-icon name="arrow-back"></ion-icon>
 			</ion-button>
 			<ion-title>Aterar Senha</ion-title>
@@ -11,20 +11,22 @@
 
 <ion-content>
 	<div class="container">
-		<ion-item>
-			<ion-label class="label" position="floating">Senha Antiga</ion-label>
-			<ion-input class="label" [(ngModel)]="update.senhaAntiga" type="password"></ion-input>
-		</ion-item>
-		<ion-item>
-			<ion-label class="label" position="floating">Nova Senha</ion-label>
-			<ion-input class="label" [(ngModel)]="update.senhaNova" type="password"></ion-input>
-		</ion-item>
-		<ion-item>
-			<ion-label class="label" position="floating">Comfirmar Nova Senha</ion-label>
-			<ion-input class="label" [(ngModel)]="confirmarNovaSenha" type="password"></ion-input>
-		</ion-item>
-		<br>
-		<br>
-		<ion-button large class="alterar" (click)="alterar()">Alterar</ion-button>
+		<form [formGroup]="formGroup" (ngSubmit)="alterar(); $event.preventDefault()">
+			<ion-item>
+				<ion-label class="label" position="floating">Senha Antiga</ion-label>
+				<ion-input class="label" formControlName="senhaAntiga" type="password"></ion-input>
+			</ion-item>
+			<ion-item>
+				<ion-label class="label" position="floating">Nova Senha</ion-label>
+				<ion-input class="label" formControlName="senhaNova" type="password"></ion-input>
+			</ion-item>
+			<ion-item>
+				<ion-label class="label" position="floating">Comfirmar Nova Senha</ion-label>
+				<ion-input class="label" formControlName="confirmarNovaSenha" type="password"></ion-input>
+			</ion-item>
+			<br>
+			<br>
+			<ion-button large class="alterar" type="submit">Alterar</ion-button>
+		</form>
 	</div>
 </ion-content>

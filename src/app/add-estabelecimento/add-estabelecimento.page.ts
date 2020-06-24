@@ -41,7 +41,7 @@ export class AddEstabelecimentoPage {
     public imageUtils: ImageUtilService,
     public sanitizer: DomSanitizer) {
     this.formGroup = this.formBuilder.group({
-      nome: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
+      nome: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(120)]],
       cnpj: ['', [Validators.minLength(14), Validators.maxLength(14)]],
       instagram: ['', []],
       facebook: ['', []],
@@ -52,12 +52,12 @@ export class AddEstabelecimentoPage {
       numero: ['', [Validators.required]],
       complemento: ['', []],
       bairro: ['', [Validators.required]],
-      cep: ['', [Validators.required]],
+      cep: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(9)]],
       cidadeId: ['', [Validators.required]],
       usuarioId: ['', []],
-      telefone1: ['', [Validators.required]],
-      telefone2: ['', []],
-      telefone3: ['', []]
+      telefone1: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(13)]],
+      telefone2: ['', [Validators.minLength(9), Validators.maxLength(13)]],
+      telefone3: ['', [Validators.minLength(9), Validators.maxLength(13)]]
     });
   }
 
@@ -127,11 +127,96 @@ export class AddEstabelecimentoPage {
     let s: string = '';
     for (const field in this.formGroup.controls) {
       if (this.formGroup.controls[field].invalid) {
-        s = s + '<p><strong>' + field + ': </strong>Valor inválido</p>';
-        if (field == 'categorias' && this.formGroup.controls.categorias.value != null) {
-          if (this.formGroup.controls[field].value.length > 2) {
-            s = s + '<p><strong>' + field + ': </strong>Máximo de 2 categorias</p>';
-          }
+        let value = this.formGroup.controls[field].value;
+        let length: number = value.length;
+        switch (field) {
+          case 'nome':
+            if (!value) {
+              s = s + '<p><strong>Nome: </strong>Preenchimento obrigatório</p>';
+            } else {
+              if (length < 4 || length > 120) {
+                s = s + '<p><strong>Nome: </strong>O nome deve conter entre 4 e 120 caráteres</p>';
+              }
+            }
+            break;
+          case 'cnpj':
+            if (length != 14) {
+              s = s + '<p><strong>CNPJ: </strong>O CNPJ deve conter 14 caráteres</p>';
+            }
+            break;
+          case 'horario':
+            if (!value) {
+              s = s + '<p><strong>Horário: </strong>Preenchimento obrigatório</p>';
+            }
+            break;
+          case 'categorias':
+            if (!value) {
+              s = s + '<p><strong>Categorias: </strong>Selecione ao menos 1 categoria</p>';
+            } else {
+              if (value.length > 2) {
+                s = s + '<p><strong>Categorias: </strong>Máximo de 2 categorias</p>';
+              }
+            }
+            break;
+          case 'cidadeId':
+            if (!value) {
+              s = s + '<p><strong>Cidade: </strong>Preenchimento obrigatório</p>';
+            }
+            break;
+          case 'logradouro':
+            if (!value) {
+              s = s + '<p><strong>Logradouro: </strong>Preenchimento obrigatório</p>';
+            }
+            break;
+          case 'numero':
+            if (!value) {
+              s = s + '<p><strong>Número: </strong>Preenchimento obrigatório</p>';
+            }
+            break;
+          case 'bairro':
+            if (!value) {
+              s = s + '<p><strong>Bairro: </strong>Preenchimento obrigatório</p>';
+            }
+            break;
+          case 'cep':
+            if (!value) {
+              s = s + '<p><strong>CEP: </strong>Preenchimento obrigatório</p>';
+            } else {
+              if (length < 8 || length > 9) {
+                s = s + '<p><strong>CEP: </strong>O nome deve conter entre 8 e 9 caráteres</p>';
+              }
+            }
+            break;
+          case 'telefone1':
+            if (!value) {
+              s = s + '<p><strong>Telefone 1: </strong>Preenchimento obrigatório</p>';
+            } else {
+              if (length < 9 || length > 13) {
+                s = s + '<p><strong>Telefone 1: </strong>O telefone deve conter entre 8 e 9 caráteres</p>';
+              }
+            }
+            break;
+          case 'telefone2':
+            if (!value) {
+              s = s + '<p><strong>Telefone 2: </strong>Preenchimento obrigatório</p>';
+            } else {
+              if (length < 9 || length > 13) {
+                s = s + '<p><strong>Telefone 2: </strong>O telefone deve conter entre 8 e 9 caráteres</p>';
+              }
+            }
+            break;
+          case 'telefone3':
+            if (!value) {
+              s = s + '<p><strong>Telefone 3: </strong>Preenchimento obrigatório</p>';
+            } else {
+              if (length < 9 || length > 13) {
+                s = s + '<p><strong>Telefone 3: </strong>O telefone deve conter entre 8 e 9 caráteres</p>';
+              }
+            }
+            break;
+          default:
+            s = s + '<p><strong>' + field + ': </strong>Valor inválido</p>';
+            break;
         }
       }
     }
@@ -147,7 +232,6 @@ export class AddEstabelecimentoPage {
         cats = cats + "," + this.formGroup.controls.categorias.value[1];
       }
       this.formGroup.controls.categorias.setValue(cats);
-      console.log(this.formGroup.value);
       this.estabelecimentoService.insert(this.formGroup.value)
         .subscribe(response => {
           if (this.photo != null) {
@@ -159,7 +243,7 @@ export class AddEstabelecimentoPage {
           this.router.navigate(['tabs/profile']);
         },
           error => {
-            this.formGroup.controls.categorias.setValue(null);
+            this.formGroup.controls.categorias.setValue("");
           });
     } else {
       this.invalidFieldsAlert();

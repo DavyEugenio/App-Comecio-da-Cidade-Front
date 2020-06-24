@@ -90,7 +90,6 @@ export class GerenciarProdutoServicoPage implements OnInit {
       );
   }
 
-
   getImageOfProdutoServicoIfExists() {
     this.produtoServicoService.getImageFromServer(this.produtoServico.id)
       .subscribe(response => {
@@ -130,7 +129,11 @@ export class GerenciarProdutoServicoPage implements OnInit {
   }
 
   updateProdutoServico() {
-    if (this.formGroup.valid) {
+    let preco = this.formGroup.controls.preco.value;
+    if (!preco) {
+      preco = 0;
+    }
+    if (this.formGroup.valid && preco >= 0.01) {
       this.produtoServicoService.update(this.formGroup.value, this.produtoServico.id)
         .subscribe(response => {
           this.showAlertOk('Produto ou serviço atualizado com sucesso');
@@ -167,8 +170,40 @@ export class GerenciarProdutoServicoPage implements OnInit {
   private listErrors(): string {
     let s: string = '';
     for (const field in this.formGroup.controls) {
-      if (this.formGroup.controls[field].invalid) {
-        s = s + '<p><strong>' + field + ': </strong>Valor inválido</p>';
+      let value = this.formGroup.controls[field].value;
+      if (value == null) {
+        value = '';
+      }
+      if (this.formGroup.controls[field].invalid || field == 'preco' && value < 0.01) {
+        let length: number = value.length;
+        switch (field) {
+          case 'nome':
+            if (!value) {
+              s = s + '<p><strong>Nome: </strong>Preenchimento obrigatório</p>';
+            } else {
+              if (length < 4 || length > 120) {
+                s = s + '<p><strong>Nome: </strong>O nome deve conter entre 4 e 120 caráteres</p>';
+              }
+            }
+            break;
+          case 'preco':
+            if (length == 0) {
+              s = s + '<p><strong>Preço: </strong>Preenchimento obrigatório</p>';
+            } else {
+              if (value < 0.01) {
+                s = s + '<p><strong>Preço: </strong>Mínimo de R$0,01</p>';
+              }
+            }
+            break;
+          case 'descricao':
+            if (length > 120) {
+              s = s + '<p><strong>Descrição: </strong>A descrição deve conter no máximo 120 carácteres</p>';
+            }
+            break;
+          default:
+            s = s + '<p><strong>' + field + ': </strong>Valor inválido</p>';
+            break;
+        }
       }
     }
     return s;

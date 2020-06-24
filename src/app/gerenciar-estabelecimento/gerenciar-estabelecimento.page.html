@@ -26,7 +26,9 @@
 					<h3>{{ estabelecimento.endereco.bairro }},{{ estabelecimento.endereco.cidade.nome }}</h3>
 					<h3>CEP {{ estabelecimento.endereco.cep }}</h3>
 				</ion-text>
-				<p><ion-icon class="icon" name="time-outline"></ion-icon> Funcionamento: {{ estabelecimento.horario }}.</p>
+				<p>
+					<ion-icon class="icon" name="time-outline"></ion-icon> Funcionamento: {{ estabelecimento.horario }}.
+				</p>
 				<p *ngIf="estabelecimento.telefone1">
 					<ion-icon class="icon" name="call-outline"></ion-icon> {{ estabelecimento.telefone1 }}
 				</p>
@@ -101,11 +103,14 @@
 
 				<ion-item>
 					<ion-label class="label" position="floating">CNPJ</ion-label>
-					<ion-input class="label2" placeholder="(apenas os números)" type="number" formControlName="cnpj"></ion-input>
+					<ion-input class="label2" placeholder="(apenas os números)" type="text" formControlName="cnpj">
+					</ion-input>
 				</ion-item>
 
 				<ion-item>
-					<ion-label class="label" position="floating"><ion-icon class="icon" name="time-outline"></ion-icon> Funcionamento</ion-label>
+					<ion-label class="label" position="floating">
+						<ion-icon class="icon" name="time-outline"></ion-icon> Funcionamento
+					</ion-label>
 					<ion-textarea class="label2" type="text" formControlName="horario"></ion-textarea>
 				</ion-item>
 
@@ -117,35 +122,48 @@
 				<p class="label sparator">Telefones</p>
 
 				<ion-item>
-					<ion-label class="label" position="fixed"><ion-icon name="call-outline"></ion-icon></ion-label>
+					<ion-label class="label" position="fixed">
+						<ion-icon name="call-outline"></ion-icon>
+					</ion-label>
 					<ion-input class="label2" type="text" formControlName="telefone1"></ion-input>
 				</ion-item>
 
 
 				<ion-item>
-					<ion-label class="label" position="fixed"><ion-icon name="call-outline"></ion-icon></ion-label>
+					<ion-label class="label" position="fixed">
+						<ion-icon name="call-outline"></ion-icon>
+					</ion-label>
 					<ion-input class="label2" type="text" formControlName="telefone2"></ion-input>
 				</ion-item>
 
 				<ion-item>
-					<ion-label class="label" position="fixed"><ion-icon name="call-outline"></ion-icon></ion-label>
+					<ion-label class="label" position="fixed">
+						<ion-icon name="call-outline"></ion-icon>
+					</ion-label>
 					<ion-input class="label2" type="text" formControlName="telefone3"></ion-input>
 				</ion-item>
 
 				<ion-item>
-					<ion-label class="label" position="fixed"><ion-icon name="globe-outline"></ion-icon></ion-label>
+					<ion-label class="label" position="fixed">
+						<ion-icon name="globe-outline"></ion-icon>
+					</ion-label>
 					<ion-input class="label2" type="text" formControlName="site"></ion-input>
 				</ion-item>
 
 				<ion-item>
-					<ion-label class="label" position="fixed"><ion-icon name="logo-instagram"></ion-icon></ion-label>
+					<ion-label class="label" position="fixed">
+						<ion-icon name="logo-instagram"></ion-icon>
+					</ion-label>
 					<ion-input class="label2" type="text" formControlName="instagram"></ion-input>
 				</ion-item>
 
 				<ion-item>
-					<ion-label class="label" position="fixed"><ion-icon name="logo-facebook"></ion-icon></ion-label>
+					<ion-label class="label" position="fixed">
+						<ion-icon name="logo-facebook"></ion-icon>
+					</ion-label>
 					<ion-input class="label2" type="text" formControlName="facebook"></ion-input>
 				</ion-item>
+				
 				<div class="form-buttons">
 					<ion-button class="form-button" color="success" block type="submit">Salvar</ion-button>
 					<ion-button class="form-button" color="danger" block type="reset"

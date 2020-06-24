@@ -11,11 +11,13 @@
 
 <ion-content>
 	<div class="container">
-		<ion-item>
-			<ion-label class="label" position="floating">E-mail</ion-label>
-			<ion-input class="label" [(ngModel)]="emailDTO.email" type="email"></ion-input>
-		</ion-item>
-		<br>
-		<ion-button large class="botao-recuperar" (click)="recuperar()">Recuperar Senha</ion-button>
+		<form [formGroup]="formGroup" (ngSubmit)="recuperar(); $event.preventDefault()">
+			<ion-item>
+				<ion-label class="label" position="floating">E-mail</ion-label>
+				<ion-input class="label" type="text" formControlName="email"></ion-input>
+			</ion-item>
+			<br>
+			<ion-button large class="botao-recuperar" type="submit">Recuperar Senha</ion-button>
+		</form>
 	</div>
 </ion-content>

@@ -61,19 +61,20 @@
           <ion-icon class="icon-button font-s" name="camera"></ion-icon>
         </ion-button>
       </div>
-      <ion-item>
-        <ion-label class="label" position="floating">None</ion-label>
-        <ion-input class="label2" [(ngModel)]="usuario.nome" autofocus></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label class="label" position="floating">E-amil</ion-label>
-        <ion-input class="label2" [(ngModel)]="usuario.email" inputmode="email" autofocus></ion-input>
-      </ion-item>
-      <div class="form-buttons">
-        <ion-button class="form-button" color="success" (click)="confirmarEdicao()">Salvar</ion-button>
-        <ion-button class="form-button" color="danger" (click)="cancelarEdicao()">Cancelar</ion-button>
-      </div>
+      <form [formGroup]="formGroup" (ngSubmit)="confirmarEdicao(); $event.preventDefault()">
+        <ion-item>
+          <ion-label class="label" position="floating">Nome</ion-label>
+          <ion-input class="label2" formControlName="nome" autofocus></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label class="label" position="floating">E-mail</ion-label>
+          <ion-input class="label2" formControlName="email" autofocus></ion-input>
+        </ion-item>
+        <div class="form-buttons">
+          <ion-button class="form-button" color="success" type="submit">Salvar</ion-button>
+          <ion-button class="form-button" color="danger" (click)="cancelarEdicao()">Cancelar</ion-button>
+        </div>
+      </form>
     </div>
     <!-- template de loading -->
     <div *ngIf="!usuario">

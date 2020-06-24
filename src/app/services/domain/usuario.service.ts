@@ -33,9 +33,9 @@ export class UsuarioService {
         );
     }
 
-    update(obj: UsuarioDTO) {
+    update(id: string, obj: UsuarioDTO) {
         return this.http.put(
-            `${API_CONFIG.baseUrl}/usuarios/${obj.id}`,
+            `${API_CONFIG.baseUrl}/usuarios/${id}`,
             obj,
             {
                 observe: 'response',
