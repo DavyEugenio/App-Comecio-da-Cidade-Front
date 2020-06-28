@@ -57,7 +57,9 @@
           <ion-input class="label2" type="text" formControlName="facebook"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label class="label" position="floating"><ion-icon class="icon" name="time-outline"></ion-icon> Horário de funcionamento*</ion-label>
+          <ion-label class="label" position="floating">
+            <ion-icon class="icon" name="time-outline"></ion-icon> Horário de funcionamento*
+          </ion-label>
           <ion-textarea class="label2" type="text" formControlName="horario"></ion-textarea>
         </ion-item>
         <ion-item>
@@ -124,20 +126,34 @@
 
   <ng-template #loading>
     <div class="container">
-      <ul class="informacoes">
-        <li class="label">Nome</li>
-        <li>
-          <ion-skeleton-text animated class="loading-large"></ion-skeleton-text>
-        </li>
-        <li class="label">Preço</li>
-        <li>
-          <ion-skeleton-text animated class="loading-large"></ion-skeleton-text>
-        </li>
-        <li class="label">Descrição</li>
-        <li>
-          <ion-skeleton-text animated class="loading-large"></ion-skeleton-text>
-        </li>
-      </ul>
+      <div class="container">
+        <div>
+          <img class="imagem-estabelecimento" src="/assets/img/sem_foto.png">
+        </div>
+        <ion-label class="ion-text-wrap">
+          <p>Nome</p>
+          <p>
+            <ion-skeleton-text animated class="loading-large"></ion-skeleton-text>
+          </p>
+          <p>Endereço</p>
+          <p>
+            <ion-skeleton-text animated class="loading-large"></ion-skeleton-text>
+          </p>
+          <p>Telefones</p>
+          <p>
+            <ion-skeleton-text animated class="loading-large"></ion-skeleton-text>
+          </p>
+          <p>Horário de Funcionamento</p>
+          <p>
+            <ion-skeleton-text animated class="loading-large"></ion-skeleton-text>
+          </p>
+          <p>Redes sociais</p>
+          <p>
+            <ion-skeleton-text animated class="loading-large"></ion-skeleton-text>
+          </p>
+        </ion-label>
+        <br>
+      </div>
     </div>
   </ng-template>
 </ion-content>

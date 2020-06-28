@@ -1,12 +1,13 @@
 import { API_CONFIG } from 'src/app/config/api.config';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router, NavigationExtras } from '@angular/router';
 import { CidadeDTO } from 'src/app/models/cidade.dto';
 import { CategoriaDTO } from 'src/app/models/categoria.dto';
 import { CategoriaService } from 'src/app/services/domain/categoria.service';
 import { EstabelecimentoDTO } from 'src/app/models/estabelecimento.dto';
 import { EstabelecimentoService } from 'src/app/services/domain/estabelecimento.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { LoadingController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -15,10 +16,11 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class Tab1Page {
   cidade: CidadeDTO;
-  categorias: CategoriaDTO[] = [];
-  estabelecimentos: EstabelecimentoDTO[] = [];
+  categorias: CategoriaDTO[] = null;
+  estabelecimentos: EstabelecimentoDTO[] = null;
   categoria: CategoriaDTO;
   nome: string = "";
+  tempo: number = 0;
   sliderOpts = {
     zoom: false,
     slidesPerView: 4,
@@ -27,17 +29,22 @@ export class Tab1Page {
   };
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
+    private alertCtrl: AlertController,
+    private loadingController: LoadingController,
     private categoriaService: CategoriaService,
     private estabelecimentoService: EstabelecimentoService,
     private storage: StorageService) {
+    this.tempo = 0;
     this.cidade = this.storage.getLocalCidade();
-    this.getEstabelecimentos();
+    this.ionViewDidEnter();
   }
-  
+
   ionViewDidEnter() {
-    this.cidade = this.storage.getLocalCidade();
+    this.presentLoading();
+  }
+
+  loadData() {
     this.categoriaService.findAll().subscribe(
       response => {
         this.categorias = response;
@@ -47,6 +54,49 @@ export class Tab1Page {
     this.getEstabelecimentos();
   }
 
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Aguarde...'
+    });
+    await loading.present();
+    if (this.categorias) {
+      loading.dismiss();
+    } else {
+      this.dataLoading(loading);
+    }
+  }
+
+  dataLoading(loading) {
+    if (this.tempo != 10) {
+      setTimeout(() => {
+        this.loadData();
+        if (!this.categorias) {
+          this.dataLoading(loading);
+        } else {
+          loading.dismiss();
+        }
+      }, 1000);
+      this.tempo = this.tempo + 0.5;
+    } else {
+      loading.dismiss();
+      this.nullCidade();
+      this.alert();
+    }
+  }
+
+  async alert() {
+    let alert = await this.alertCtrl.create({
+      header: 'Tempo máximo excedido',
+      message: 'Servidor incontactável,<br> por favor tente acessar novamente mais tarde',
+      backdropDismiss: false,
+      buttons: [
+        {
+          text: 'Ok'
+        }
+      ]
+    });
+    await alert.present();
+  }
   getEstabelecimentos() {
     this.estabelecimentoService.findByCidade(this.cidade.id).subscribe(
       response => {
@@ -87,7 +137,7 @@ export class Tab1Page {
   getImageOfCategoriaIfExists() {
     for (let i = 0; i < this.categorias.length; i++) {
       let cat = this.categorias[i];
-      this.estabelecimentoService.getImageFromServer(cat.id)
+      this.categoriaService.getImageFromServer(cat.id)
         .subscribe(response => {
           cat.imageUrl = `${API_CONFIG.baseUrl}/imagens/cat${cat.id}.jpg`;
         },

@@ -17,8 +17,7 @@ export class PhotoService {
       source: CameraSource.Prompt,
       quality: 100,
       width: 600,
-      height: 600,
-      allowEditing: true,
+      height: 600
     });
 
     return await this.readAsBase64(capturedPhoto);

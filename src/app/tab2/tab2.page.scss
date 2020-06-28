@@ -1,5 +1,5 @@
 ion-slides{
-    height: 100%;
+    height: calc(100% - 48px);
 }
 ion-content{
     --background: white;
@@ -12,6 +12,7 @@ ion-content{
     border-radius: 10px;
     background-color: #e2e0eb;
     padding-top: 20px;
+    padding-bottom: 10px;
     ion-label{ 
         font-size: large;
         color: black;
@@ -30,20 +31,18 @@ ion-content{
         font-size: large;
         margin-left: 10px;
         margin-right: 10px;  
-    }
-    &.altura1{height: 44%; }
-    &.altura2{height: 69%; }    
+    }   
 }
 .rodape{
     position: absolute;
     bottom: 0;
-    left: 0;
-    right: 0;
-    height: 30%;
+    width: 100%;
+    height: 200px;
     color: white; text-align: center;
     background-image: url('/assets/img/background-botton-comercio-da-cidade-2.png');
-    background-size: contain;
-    padding-top: 10px;
+    background-position: bottom;
+    background-repeat: repeat-x;
+    background-size: auto 200px;
 }
 
 .danger{
