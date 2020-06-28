@@ -1,62 +1,66 @@
-ion-content{
+ion-content {
     --background: white;
 }
-.topo{
-    margin: 18px; 
+.topo {
+    margin: 18px;
     text-align: center;
-    color:black;
+    color: black;
     background-color: #a6ce39ff;
 }
-.formulario1{
+.formulario1 {
     position: absolute;
-    top: 35%; left: 0; right: 0;
-    height: 30%; width: 85%;
+    top: 35%;
+    left: 0;
+    right: 0;
+    width: 85%;
     margin: 0 auto;
     border-radius: 10px;
     background-color: #e2e0eb;
     padding-top: 20px;
     padding-left: 10px;
     padding-right: 10px;
-    ion-label{ 
+    padding-bottom: 20px;
+    ion-label {
         font-size: large;
         color: black;
-    }   
-    ion-select{
+    }
+    ion-select {
         background-color: white;
         opacity: 0.5;
         color: black;
         font-size: large;
         border-radius: 10px;
-        margin-bottom: 20px;
+        margin-bottom: 7px;
         margin-top: 10px;
     }
-    ion-button{
+    ion-button {
         margin-top: 5px;
         font-size: large;
-        
-    }    
+    }
 }
 
-.logo{
+.logo {
     position: absolute;
-    top: 0; left: 0; right: 0;
+    top: 0;
+    left: 0;
+    right: 0;
     height: 30%;
     margin-top: 10px;
-    color: rgb(10, 10, 10); 
+    color: rgb(10, 10, 10);
     text-align: center;
-    background-image: url('/assets/img/Logo-Comercio-da-Cidade.png');
+    background-image: url("/assets/img/Logo-Comercio-da-Cidade.png");
     background-size: contain;
     background-position-x: center;
     background-repeat: no-repeat;
     padding-top: 10px;
 }
 
-.rodape{
+.rodape {
     position: absolute;
     bottom: 0;
     width: 100%;
     height: 200px;
-    background-image: url('/assets/img/background2.png');
+    background-image: url("/assets/img/background2.png");
     background-position: bottom;
     background-repeat: repeat-x;
     background-size: auto 200px;
