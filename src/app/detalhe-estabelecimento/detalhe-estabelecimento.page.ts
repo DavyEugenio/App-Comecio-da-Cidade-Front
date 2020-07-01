@@ -36,6 +36,7 @@ export class DetalheEstabelecimentoPage implements OnInit {
               this.getTelefones();
               this.getImageOfEstabelecimentoIfExists();
               this.getImageOfProdutoServicoIfExists();
+              this.formatarDescricaoProdutoServico();
             },
             error => {
             }
@@ -103,5 +104,18 @@ export class DetalheEstabelecimentoPage implements OnInit {
       }
     };
     this.router.navigate(['tabs/detalhe-produto-servico'], dados);
+  }
+
+  formatarDescricaoProdutoServico(){
+    let produtoServicos = this.estabelecimento.produtoServicos;
+    let leng = produtoServicos.length;
+
+    for (let i = 0; i < leng; i++){
+      if (produtoServicos[i].nome.length > 7){
+
+        this.estabelecimento.produtoServicos[i].nome = produtoServicos[i].nome.slice(0,7);
+        this.estabelecimento.produtoServicos[i].nome += " ...";
+      }
+    }
   }
 }
