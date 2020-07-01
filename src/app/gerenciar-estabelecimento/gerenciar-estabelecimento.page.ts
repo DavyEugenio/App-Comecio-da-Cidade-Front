@@ -81,6 +81,7 @@ export class GerenciarEstabelecimentoPage {
           this.getImageOfEstabelecimentoIfExists();
           this.getImageOfProdutoServicoIfExists();
           this.getTelefones();
+          this.formatarDescricaoProdutoServico();
         },
         error => {
         }
@@ -413,5 +414,17 @@ export class GerenciarEstabelecimentoPage {
   profile() {
     this.cancelarEdicaoEstabelecimento();
     this.router.navigate(['tabs/profile']);
+  }
+  formatarDescricaoProdutoServico(){
+    let produtoServicos = this.estabelecimento.produtoServicos;
+    let leng = produtoServicos.length;
+
+    for (let i = 0; i < leng; i++){
+      if (produtoServicos[i].nome.length > 7){
+
+        this.estabelecimento.produtoServicos[i].nome = produtoServicos[i].nome.slice(0,7);
+        this.estabelecimento.produtoServicos[i].nome += " ...";
+      }
+    }
   }
 }

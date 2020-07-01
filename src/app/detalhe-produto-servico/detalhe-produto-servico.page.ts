@@ -11,18 +11,27 @@ import { API_CONFIG } from 'src/app/config/api.config';
 })
 export class DetalheProdutoServicoPage implements OnInit {
 
-  produtoServico: ProdutoServicoDTO;
-  estabelecimentoID: number;
+  produtoServicos: ProdutoServicoDTO[] = [];
+  end: string;
+  begin: string;
+  estabelecimentoID: string;
+  sliderOpts = {
+    zoom: false,
+    slidesPerView: 1,
+    centeredSlides: false,
+    spaceBeetween: 1
+  };
   constructor(private router: Router, private route: ActivatedRoute, private produtoServicoService: ProdutoServicoService) {
     this.route.queryParams.subscribe(params => {
       let getNav = this.router.getCurrentNavigation();
       if (getNav.extras.state) {
-        let a = getNav.extras.state.produtoID;
-        this.estabelecimentoID = getNav.extras.state.estabelecimentoID;;
-        this.produtoServicoService.findById(a)
+        this.estabelecimentoID = getNav.extras.state.estabelecimentoID;
+        this.produtoServicoService.findByEstablishment(this.estabelecimentoID)
           .subscribe(
             response => {
-              this.produtoServico = response;
+              this.produtoServicos = response;
+              this.begin = this.produtoServicos[0].id;
+              this.end = this.produtoServicos[this.produtoServicos.length - 1].id;
               this.getImageIfExists();
             },
             error => {
@@ -35,17 +44,29 @@ export class DetalheProdutoServicoPage implements OnInit {
   }
 
   ngOnInit() {
+
+  }
+
+  isBeginning(id: string): boolean {
+    return this.begin === id;
+  }
+
+  isEnd(id: string): boolean {
+    return this.end === id;
   }
 
   getImageIfExists() {
-    this.produtoServicoService.getImageFromServer(this.produtoServico.id)
-      .subscribe(response => {
-        this.produtoServico.imageUrl = `${API_CONFIG.baseUrl}/imagens/pro${this.produtoServico.id}.jpg`;
-      },
-        error => {
-          this.produtoServico.imageUrl = '/assets/img/sem_foto.png';
-        }
-      );
+    for (let i = 0; i < this.produtoServicos.length; i++) {
+      let ps = this.produtoServicos[i];
+      this.produtoServicoService.getImageFromServer(ps.id)
+        .subscribe(response => {
+          ps.imageUrl = `${API_CONFIG.baseUrl}/imagens/pro${ps.id}.jpg`;
+        },
+          error => {
+            ps.imageUrl = '/assets/img/sem_foto.png';
+          }
+        );
+    }
   }
 
   detalheEstabelecimento() {
