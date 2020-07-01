@@ -17,20 +17,32 @@
 
 <ion-content>
 
-  <ng-container *ngIf="produtoServico; else loading">
-    <div class="container">
-      <div>
-        <img class="imagem-produto" [src]="produtoServico?.imageUrl">
+  <ion-slides [options]="sliderOpts">
+    <ion-slide *ngFor="let ps of produtoServicos">
+      <div class="container">
+        <div>
+          <img class="imagem-produto" [src]="ps?.imageUrl">
+        </div>
+        <ion-label class="ion-text-wrap">
+          <ion-text color="primary">
+            <h1>{{ps.nome }}</h1>
+            <h2>R${{ps.preco}}</h2>
+          </ion-text>
+          <p>{{ps.descricao}}</p>
+          {{ps.id}}
+          <p>{{isEnd(ps.id)}}</p>
+        </ion-label>
+        <div *ngIf="produtoServicos.length !=1">
+          <h2 class="setaDireita" *ngIf="!isEnd(ps.id)">
+            <ion-icon name="arrow-forward-outline"></ion-icon>
+          </h2>
+          <h2 class="setaEsquerda" *ngIf="!isBeginning(ps.id)">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </h2>
+        </div>
       </div>
-      <ion-label class="ion-text-wrap">
-        <ion-text color="primary">
-          <h1>{{produtoServico.nome }}</h1>
-          <h2>R${{produtoServico.preco}}</h2>
-        </ion-text>
-        <p>{{produtoServico.descricao}}</p>
-      </ion-label>
-    </div>
-  </ng-container>
+    </ion-slide>
+  </ion-slides>
 
   <ng-template #loading>
     <div class="container">

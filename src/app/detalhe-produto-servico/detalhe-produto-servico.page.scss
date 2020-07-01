@@ -9,8 +9,12 @@
 }
 .container {
     padding-top: 10px;
-    margin-left: 13%;
-    width: 74%;
+    margin: auto;
+    width: 80%;
+    height: 100%;
+    text-align: left;
+}
+ion-slides{
     height: 100%;
 }
 
@@ -25,6 +29,19 @@
     color: #8c0043ff;
 }
 
+.setaDireita {
+    position: absolute;
+    right: 5%;
+    color: gray;
+    bottom: 10%;
+}
+
+.setaEsquerda {
+    position: absolute;
+    left: 5%;
+    color: gray;
+    bottom: 10%;
+}
 // informações
 .informacoes {
     width: 100%;
