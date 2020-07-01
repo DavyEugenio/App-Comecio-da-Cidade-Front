@@ -16,8 +16,9 @@ export class PhotoService {
       resultType: CameraResultType.Uri,
       source: CameraSource.Prompt,
       quality: 100,
-      width: 600,
-      height: 600
+      promptLabelHeader: 'Selecionar fonte',
+      promptLabelPhoto: 'Galeria',
+      promptLabelPicture: 'Camera',
     });
 
     return await this.readAsBase64(capturedPhoto);

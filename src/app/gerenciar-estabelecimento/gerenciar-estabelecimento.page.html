@@ -42,7 +42,7 @@
 					<ion-icon class="icon" name="globe-outline"></ion-icon> {{ estabelecimento.site }}
 				</p>
 				<p *ngIf="estabelecimento.instagram">
-					<ion-icon class="icon" name="logo-instagram"></ion-icon> {{ estabelecimento.instagram }}
+					<ion-icon class="icon" name="logo-instagram"></ion-icon> @{{ estabelecimento.instagram }}
 				</p>
 				<p *ngIf="estabelecimento.facebook">
 					<ion-icon class="icon" name="logo-facebook"></ion-icon> {{ estabelecimento.facebook }}
@@ -154,7 +154,7 @@
 					<ion-label class="label" position="fixed">
 						<ion-icon name="logo-instagram"></ion-icon>
 					</ion-label>
-					<ion-input class="label2" type="text" formControlName="instagram"></ion-input>
+					@<ion-input class="label2" type="text" formControlName="instagram"></ion-input>
 				</ion-item>
 
 				<ion-item>

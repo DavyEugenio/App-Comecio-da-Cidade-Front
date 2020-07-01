@@ -30,7 +30,8 @@ export class DetalheProdutoServicoPage implements OnInit {
           .subscribe(
             response => {
               this.produtoServicos = response;
-              this.begin = this.pr
+              this.begin = this.produtoServicos[0].id;
+              this.end = this.produtoServicos[this.produtoServicos.length - 1].id;
               this.getImageIfExists();
             },
             error => {
@@ -43,18 +44,17 @@ export class DetalheProdutoServicoPage implements OnInit {
   }
 
   ngOnInit() {
-    
+
   }
 
   isBeginning(id: string): boolean {
-    console.log(id);
-    return this.produtoServicos[0].id === id;
+    return this.begin === id;
   }
 
   isEnd(id: string): boolean {
-    let lenght = this.produtoServicos.length;
-    return this.produtoServicos[length - 1].id === id;
+    return this.end === id;
   }
+
   getImageIfExists() {
     for (let i = 0; i < this.produtoServicos.length; i++) {
       let ps = this.produtoServicos[i];
