@@ -12,6 +12,7 @@ import { EstabelecimentoDTO } from 'src/app/models/estabelecimento.dto';
 })
 export class DetalheEstabelecimentoPage implements OnInit {
   estabelecimento: EstabelecimentoDTO;
+  page: number = 0;
   sliderOpts = {
     zoom: false,
     slidesPerView: 4,
@@ -112,7 +113,6 @@ export class DetalheEstabelecimentoPage implements OnInit {
 
     for (let i = 0; i < leng; i++){
       if (produtoServicos[i].nome.length > 7){
-
         this.estabelecimento.produtoServicos[i].nome = produtoServicos[i].nome.slice(0,7);
         this.estabelecimento.produtoServicos[i].nome += " ...";
       }

@@ -15,9 +15,10 @@ import { LoadingController, AlertController } from '@ionic/angular';
   styleUrls: ['tab1.page.scss'],
 })
 export class Tab1Page {
+  page: number = 0;
   cidade: CidadeDTO;
   categorias: CategoriaDTO[] = null;
-  estabelecimentos: EstabelecimentoDTO[] = null;
+  estabelecimentos: EstabelecimentoDTO[] = [];
   categoria: CategoriaDTO;
   nome: string = "";
   tempo: number = 0;
@@ -37,7 +38,6 @@ export class Tab1Page {
     private storage: StorageService) {
     this.tempo = 0;
     this.cidade = this.storage.getLocalCidade();
-    this.ionViewDidEnter();
   }
 
   ionViewDidEnter() {
@@ -69,6 +69,7 @@ export class Tab1Page {
   dataLoading(loading) {
     if (this.tempo != 10) {
       setTimeout(() => {
+        this.estabelecimentos = [];
         this.loadData();
         if (!this.categorias) {
           this.dataLoading(loading);
@@ -97,11 +98,14 @@ export class Tab1Page {
     });
     await alert.present();
   }
+
   getEstabelecimentos() {
-    this.estabelecimentoService.findByCidade(this.cidade.id).subscribe(
+    this.estabelecimentoService.findPageByCidade(this.cidade.id, this.page, 4).subscribe(
       response => {
-        this.estabelecimentos = response;
-        this.getImageOfEstabelecimentoIfExists();
+        let start = this.estabelecimentos.length;
+        this.estabelecimentos = this.estabelecimentos.concat(response['content']);
+        let end = this.estabelecimentos.length;
+        this.getImageOfEstabelecimentoIfExists(start, end);
       }
     );
   }
@@ -120,9 +124,10 @@ export class Tab1Page {
     this.router.navigate(['home']);
   }
 
-  getImageOfEstabelecimentoIfExists() {
-    for (let i = 0; i < this.estabelecimentos.length; i++) {
+  getImageOfEstabelecimentoIfExists(start: number, end: number) {
+    for (let i = start; i < end; i++) {
       let est = this.estabelecimentos[i];
+      console.log(est.id);
       this.estabelecimentoService.getImageFromServer(est.id)
         .subscribe(response => {
           est.imageUrl = `${API_CONFIG.baseUrl}/imagens/est${est.id}.jpg`;
@@ -166,11 +171,21 @@ export class Tab1Page {
     this.estabelecimentoService.search(this.nome, this.cidade.id, categoriaId)
       .subscribe(
         response => {
+          let start = this.estabelecimentos.length;
           this.estabelecimentos = response['content'];
-          this.getImageOfEstabelecimentoIfExists();
+          let end = this.estabelecimentos.length - 1;
+          this.getImageOfEstabelecimentoIfExists(start, end);
         },
         error => {
         }
       );
+  }
+  
+  doInfinite(infiniteScroll) {
+    this.page++;
+    this.getEstabelecimentos();
+    setTimeout(() => {
+      infiniteScroll.target.complete();
+    }, 1000);
   }
 }
