@@ -16,7 +16,8 @@
 </ng-template>
 
 <ion-content>
-  <ion-slides [options]="sliderOpts">
+  <ion-slides #slides [options]="sliderOpts" (ionSlidesDidLoad)="controlArrows()"
+    (ionSlideWillChange)="controlArrows()">
     <ion-slide *ngFor="let ps of produtoServicos">
       <div class="container">
         <div>
@@ -29,14 +30,6 @@
           </ion-text>
           <p>{{ps.descricao}}</p>
         </ion-label>
-        <div *ngIf="produtoServicos.length !=1">
-          <h2 class="setaDireita" *ngIf="!isEnd(ps.id)">
-            <ion-icon name="arrow-forward-outline"></ion-icon>
-          </h2>
-          <h2 class="setaEsquerda" *ngIf="!isBeginning(ps.id)">
-            <ion-icon name="arrow-back-outline"></ion-icon>
-          </h2>
-        </div>
       </div>
     </ion-slide>
   </ion-slides>
@@ -55,4 +48,10 @@
       </ion-label>
     </div>
   </ng-template>
+  <h2 class="setaDireita" *ngIf="rightArrow">
+    <ion-icon name="arrow-forward-outline" (click)="slideNext()"></ion-icon>
+  </h2>
+  <h2 class="setaEsquerda" *ngIf="leftArrow" (click)="slidePrev()">
+    <ion-icon name="arrow-back-outline"></ion-icon>
+  </h2>
 </ion-content>

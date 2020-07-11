@@ -9,7 +9,7 @@
 }
 .container {
     padding-top: 10px;
-    margin-left: 5%;
+    margin: auto;
     width: 90%;
     height: 100%;
 }
@@ -26,19 +26,19 @@
 }
 
 .setaDireita {
-    position: absolute;
+    position: fixed;
     right: 5%;
     color: gray;
-    bottom: 10%;
+    bottom: 0;
 }
 
 .setaEsquerda {
-    position: absolute;
+    position: fixed;
     left: 5%;
     color: gray;
-    bottom: 10%;
+    bottom: 0;
 }
-// informações
+
 .informacoes {
     width: 100%;
     height: auto;
@@ -62,8 +62,6 @@
     background-color: white;
     color: #8c0043ff;
 }
-
-/* loadings das informacoes */
 
 .loading {
     border-radius: 10px;

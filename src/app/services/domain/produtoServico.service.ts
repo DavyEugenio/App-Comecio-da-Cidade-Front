@@ -29,7 +29,7 @@ export class ProdutoServicoService {
   }
 
   findPageByEstablishment(page: number = 0, linesPerPage: number = 24, id_estabelecimento: string): Observable<ProdutoServicoDTO[]> {
-    return this.http.get<ProdutoServicoDTO[]>(`${API_CONFIG.baseUrl}/produtoServicos/estabelecimento/${id_estabelecimento}page?page=${page}&linesPerPage=${linesPerPage}`);
+    return this.http.get<ProdutoServicoDTO[]>(`${API_CONFIG.baseUrl}/produtoServicos/estabelecimento/${id_estabelecimento}/page?page=${page}&linesPerPage=${linesPerPage}`);
   }
 
   insert(obj: ProdutoServicoDTO) {

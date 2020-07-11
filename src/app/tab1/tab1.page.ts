@@ -100,7 +100,7 @@ export class Tab1Page {
   }
 
   getEstabelecimentos() {
-    this.estabelecimentoService.findPageByCidade(this.cidade.id, this.page, 4).subscribe(
+    this.estabelecimentoService.findPageByCidade(this.cidade.id, this.page, 10).subscribe(
       response => {
         let start = this.estabelecimentos.length;
         this.estabelecimentos = this.estabelecimentos.concat(response['content']);
@@ -127,7 +127,6 @@ export class Tab1Page {
   getImageOfEstabelecimentoIfExists(start: number, end: number) {
     for (let i = start; i < end; i++) {
       let est = this.estabelecimentos[i];
-      console.log(est.id);
       this.estabelecimentoService.getImageFromServer(est.id)
         .subscribe(response => {
           est.imageUrl = `${API_CONFIG.baseUrl}/imagens/est${est.id}.jpg`;
@@ -180,7 +179,7 @@ export class Tab1Page {
         }
       );
   }
-  
+
   doInfinite(infiniteScroll) {
     this.page++;
     this.getEstabelecimentos();

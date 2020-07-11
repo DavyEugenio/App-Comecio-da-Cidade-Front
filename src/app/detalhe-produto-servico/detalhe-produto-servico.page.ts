@@ -1,62 +1,105 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavigationExtras, Router, ActivatedRoute } from '@angular/router';
 import { ProdutoServicoService } from 'src/app/services/domain/produtoServico.service';
 import { ProdutoServicoDTO } from 'src/app/models/produtoServico.dto';
 import { API_CONFIG } from 'src/app/config/api.config';
+import { IonSlides } from '@ionic/angular';
 
 @Component({
   selector: 'app-detalhe-produto-servico',
   templateUrl: './detalhe-produto-servico.page.html',
   styleUrls: ['./detalhe-produto-servico.page.scss'],
 })
-export class DetalheProdutoServicoPage implements OnInit {
+
+export class DetalheProdutoServicoPage {
 
   produtoServicos: ProdutoServicoDTO[] = [];
-  end: string;
-  begin: string;
   estabelecimentoID: string;
+  page: number = 0;
+  rightArrow: boolean = false;
+  leftArrow: boolean = false;
+  linesPerPage: number = 10;
   sliderOpts = {
     zoom: false,
     slidesPerView: 1,
     centeredSlides: false,
     spaceBeetween: 1
   };
+  @ViewChild('slides') slides: IonSlides;
   constructor(private router: Router, private route: ActivatedRoute, private produtoServicoService: ProdutoServicoService) {
     this.route.queryParams.subscribe(params => {
       let getNav = this.router.getCurrentNavigation();
       if (getNav.extras.state) {
         this.estabelecimentoID = getNav.extras.state.estabelecimentoID;
-        this.produtoServicoService.findByEstablishment(this.estabelecimentoID)
-          .subscribe(
-            response => {
-              this.produtoServicos = response;
-              this.begin = this.produtoServicos[0].id;
-              this.end = this.produtoServicos[this.produtoServicos.length - 1].id;
-              this.getImageIfExists();
-            },
-            error => {
-            }
-          );
       } else {
         this.router.navigate(['tabs/tab1']);
       }
     });
   }
 
-  ngOnInit() {
-
+  ionViewDidEnter() {
+    this.page = 0;
+    this.produtoServicos = [];
+    this.slides.slideTo(0);
+    if (this.estabelecimentoID) {
+      this.loadData();
+      this.controlArrows();
+    }
   }
 
-  isBeginning(id: string): boolean {
-    return this.begin === id;
+  loadData() {
+    this.produtoServicoService.findPageByEstablishment(this.page, this.linesPerPage, this.estabelecimentoID)
+      .subscribe(
+        response => {
+          let start = this.produtoServicos.length;
+          this.produtoServicos = this.produtoServicos.concat(response['content']);
+          let end = this.produtoServicos.length;
+          if (start != end) {
+            this.getImageIfExists(start, end);
+            this.controlArrows();
+          }
+        },
+        error => {
+        }
+      );
   }
 
-  isEnd(id: string): boolean {
-    return this.end === id;
+  controlArrows() {
+    this.slides.getActiveIndex().then((index: number) => {
+      let length = this.produtoServicos.length;
+      if (length > 1) {
+        if (index > 0 && index < (length - 1)) {
+          this.leftArrow = true;
+          this.rightArrow = true;
+        }
+        if (index == 0) {
+          this.leftArrow = false;
+          this.rightArrow = length != 1;
+        }
+        if (index == (length - 1)) {
+          this.leftArrow = true;
+          if (length >= this.linesPerPage) {
+            this.doInfinite();
+          }
+          this.rightArrow = index != (length - 1);
+        }
+      } else {
+        this.leftArrow = false;
+        this.rightArrow = false;
+      }
+    });
   }
 
-  getImageIfExists() {
-    for (let i = 0; i < this.produtoServicos.length; i++) {
+  slideNext() {
+    this.slides.slideNext();
+  }
+
+  slidePrev() {
+    this.slides.slidePrev();
+  }
+
+  getImageIfExists(start: number, end: number) {
+    for (let i = start; i < end; i++) {
       let ps = this.produtoServicos[i];
       this.produtoServicoService.getImageFromServer(ps.id)
         .subscribe(response => {
@@ -76,5 +119,10 @@ export class DetalheProdutoServicoPage implements OnInit {
       }
     };
     this.router.navigate(['tabs/detalhe-estabelecimento'], dados);
+  }
+
+  doInfinite() {
+    this.page++;
+    this.loadData();
   }
 }
