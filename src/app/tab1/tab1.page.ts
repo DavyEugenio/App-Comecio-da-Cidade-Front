@@ -159,6 +159,8 @@ export class Tab1Page {
 
   clearCategoria() {
     this.categoria = null;
+    this.page = 0;
+    this.estabelecimentos = [];
     this.getEstabelecimentos();
   }
 
@@ -170,9 +172,9 @@ export class Tab1Page {
     this.estabelecimentoService.search(this.nome, this.cidade.id, categoriaId)
       .subscribe(
         response => {
-          let start = this.estabelecimentos.length;
+          let start = 0;
           this.estabelecimentos = response['content'];
-          let end = this.estabelecimentos.length - 1;
+          let end = this.estabelecimentos.length;
           this.getImageOfEstabelecimentoIfExists(start, end);
         },
         error => {
